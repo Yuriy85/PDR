@@ -72,8 +72,7 @@ button {
 footer {
   display: flex;
   justify-content: center;
-  background: url(../assets/img/background_about_lay.png),
-    radial-gradient(85% 200% at 0% 50%, #513d2f 0%, #1a1a1c 100%);
+  background: radial-gradient(85% 200% at 0% 50%, #513d2f 0%, #1a1a1c 100%);
   padding: 30px;
 }
 .footer_content {
@@ -211,8 +210,7 @@ header a {
 /* main page Not only */
 .start_section {
   width: 100%;
-  background: url('../assets/img/background_about_lay.png'),
-    radial-gradient(85% 155% at 0% 0%, #5b483a 0%, #262425 100%);
+  background: radial-gradient(85% 155% at 0% 0%, #5b483a 0%, #262425 100%);
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -679,7 +677,6 @@ header a {
   }
 }
 @media screen and (max-width: 425px) {
-
   .footer_content .contacts:last-of-type {
     align-items: flex-start;
   }
