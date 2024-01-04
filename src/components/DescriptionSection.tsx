@@ -1,10 +1,10 @@
 import { beforeAfter } from '../assets/img';
 
-function AboutSectionTwo() {
+function DescriptionSection() {
   return (
-    <section className="about_section">
-      <div className="about_content about_content--two">
-        <div className="content_2">
+    <section className="description">
+      <div className="description__wrapper">
+        <div className="description__content">
           <h2>Cохранность ЛКП</h2>
           <p>
             Технология PDR позволяет производить ремонт, сохраняя при этом
@@ -19,10 +19,10 @@ function AboutSectionTwo() {
             авто.
           </p>
         </div>
-        <img className="about_pets" src={beforeAfter} alt="pets" />
+        <img className="description__img" src={beforeAfter} alt="pdr" />
       </div>
     </section>
   );
 }
 
-export default AboutSectionTwo;
+export default DescriptionSection;

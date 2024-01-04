@@ -11,7 +11,7 @@ function DarkSection() {
           context.setShowBurger(false);
         }
       }}
-      className={context.showBurger ? 'dark dark_show' : 'dark'}
+      className={context.showBurger ? 'dark dark--show' : 'dark'}
     />
   );
 }

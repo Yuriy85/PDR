@@ -2,9 +2,9 @@ import { startPdr } from '../assets/img';
 
 function StartSection() {
   return (
-    <section className="start_section">
-      <div className="start_content">
-        <div className="content_1">
+    <section className="start">
+      <div className="start__wrapper">
+        <div className="start__content">
           <h1>Удаление вмятин без покраски</h1>
           <p>
             Ремонт вмятин без покраски (PDR) - это квалифицированный метод
@@ -12,11 +12,11 @@ function StartSection() {
             использованием различных инструментов и методов для полного
             восстановления повреждений до состояния, которое было до повреждения
           </p>
-          <button className="button" onClick={() => (location.href = '#works')}>
+          <button onClick={() => (location.href = '#works')}>
             Посмотреть работы
           </button>
         </div>
-        <img className="start_pet" src={startPdr} alt="pdr" />
+        <img className="start__img" src={startPdr} alt="pdr" />
       </div>
     </section>
   );

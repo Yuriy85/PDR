@@ -1,22 +1,22 @@
 import ReactDOM from 'react-dom/client';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import './index.css';
+import './styles/main.scss';
 import StartSection from './components/StartSection';
 import AboutSection from './components/AboutSection';
 import WorksSection from './components/WorksSection';
-import AboutSectionTwo from './components/AboutSectionTwo';
 import DarkSection from './components/DarkSection';
 import { AppDataContext } from './context';
 import { useEffect, useState } from 'react';
+import DescriptionSection from './components/DescriptionSection';
 
 function App() {
   const [showBurger, setShowBurger] = useState(false);
   const body = document.querySelector('body');
   useEffect(() => {
     showBurger
-      ? body?.classList.add('body_show')
-      : body?.classList.remove('body_show');
+      ? body?.classList.add('body--show')
+      : body?.classList.remove('body--show');
     body;
   }, [showBurger]);
   return (
@@ -26,7 +26,7 @@ function App() {
         <StartSection />
         <AboutSection />
         <WorksSection />
-        <AboutSectionTwo />
+        <DescriptionSection />
         <DarkSection />
       </main>
       <Footer />

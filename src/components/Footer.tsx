@@ -4,16 +4,16 @@ import { ReactSVG } from 'react-svg';
 
 function Footer() {
   return (
-    <footer id="contact">
-      <div className="footer_content">
-        <div className="contacts">
+    <footer className="footer" id="contact">
+      <div className="footer__wrapper">
+        <div className="footer__contacts">
           <h2>Контакты:</h2>
           <a href="https://www.instagram.com/galushkodmitriy?igsh=MXNnOXQzMm00dnNlbQ==">
-            <ReactSVG className="logo_icon" src={instSvg} />
+            <ReactSVG className="footer__icon" src={instSvg} />
             <span>galushkodmitriy</span>
           </a>
           <a href="tel:+375336913696">
-            <ReactSVG className="logo_icon" src={phoneSvg} />
+            <ReactSVG className="footer__icon" src={phoneSvg} />
             <span>+375-33-691-36-96</span>
           </a>
           <a
@@ -21,11 +21,11 @@ function Footer() {
             target="_blank"
             rel="noreferrer"
           >
-            <ReactSVG className="logo_icon" src={pointSvg} />
+            <ReactSVG className="footer__icon" src={pointSvg} />
             <span>Гаражный массив по ул. Фатина, г. Могилев</span>
           </a>
         </div>
-        <img className="footer_pet" src={porschePng} alt="pet" />
+        <img className="footer__img" src={porschePng} alt="car" />
       </div>
     </footer>
   );

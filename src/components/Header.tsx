@@ -5,9 +5,9 @@ function Header() {
   const context = useContext(AppDataContext);
 
   return (
-    <header>
-      <div className="header_section_main">
-        <a className="logo" id="logo" href="#no_scroll">
+    <header className="header">
+      <div className="header__wrapper">
+        <a className="header__logo" id="logo" href="#no_scroll">
           <p>Fatina St PDR</p>
           <p>Удаление вмятин без покраски</p>
         </a>
@@ -18,14 +18,20 @@ function Header() {
               context.setShowBurger(!context.showBurger);
             }
           }}
-          className={context.showBurger ? 'burger burger_show' : 'burger'}
+          className={
+            context.showBurger
+              ? 'header__burger header__burger--show'
+              : 'header__burger'
+          }
         >
           <hr />
           <hr />
           <hr />
         </div>
         <nav
-          className={context.showBurger ? 'nav_menu nav_menu_show' : 'nav_menu'}
+          className={
+            context.showBurger ? 'header__nav header__nav--show' : 'header__nav'
+          }
         >
           <ul
             onClick={() => {
@@ -34,16 +40,16 @@ function Header() {
               }
             }}
           >
-            <li>
+            <li className="header__nav-li header__nav-li--show">
               <a href="#no_scroll">Главная</a>
             </li>
-            <li>
+            <li className="header__nav-li">
               <a href="#works">Наши работы</a>
             </li>
-            <li>
+            <li className="header__nav-li">
               <a href="#no_scroll">Цены</a>
             </li>
-            <li>
+            <li className="header__nav-li">
               <a href="#contact">Контакты</a>
             </li>
           </ul>

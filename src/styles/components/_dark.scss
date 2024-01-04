@@ -1,0 +1,14 @@
+.dark {
+  scale: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100%;
+  z-index: 0;
+  left: 0;
+  top: 0;
+  transition: background-color 0.5s;
+  &--show {
+    scale: 1;
+    background: rgba(41, 41, 41, 0.6);
+  }
+}

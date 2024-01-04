@@ -2,10 +2,10 @@ import { tools } from '../assets/img';
 
 function AboutSection() {
   return (
-    <section className="about_section">
-      <div className="about_content">
-        <img className="about_pets" src={tools} alt="pets" />
-        <div className="content_2">
+    <section className="about">
+      <div className="about__wrapper">
+        <img className="about_img" src={tools} alt="pdr tools" />
+        <div className="about__content">
           <h2>Экономия средств и времени</h2>
           <p>
             Не нужны шпатлевки и покраска. Мы используем различные

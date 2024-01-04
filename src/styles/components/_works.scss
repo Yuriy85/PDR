@@ -1,0 +1,11 @@
+.works {
+  background: $background-color;
+  @include container;
+}
+
+.works__wrapper {
+  max-width: $max-width;
+  h2 {
+    margin-bottom: 30px;
+  }
+}
