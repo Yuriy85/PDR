@@ -6,5 +6,18 @@ import car1 from './car_1.jpg';
 import car2 from './car_2.jpg';
 import car3 from './car_3.jpg';
 import car4 from './car_4.jpg';
+import reconstruction from './reconstruction.png';
+import notFound from './not_found.png';
 
-export { porschePng, tools, beforeAfter, startPdr, car1, car2, car3, car4 };
+export {
+  porschePng,
+  tools,
+  beforeAfter,
+  startPdr,
+  car1,
+  car2,
+  car3,
+  car4,
+  reconstruction,
+  notFound,
+};

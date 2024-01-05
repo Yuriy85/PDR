@@ -14,7 +14,7 @@ a {
   text-decoration: none;
   color: $main-text-color;
   font-family: $anchor-font-stack;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 p {
   font-size: 1rem;
@@ -27,4 +27,36 @@ h2 {
   color: $title-color;
   letter-spacing: 1px;
   font-size: 1.7rem;
+}
+
+.alert-enter {
+  transform: translateX(-200%);
+}
+.alert-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms;
+}
+.alert-exit {
+  transform: translateX(-200%);
+}
+
+.alert-exit-active {
+  transform: translateX(0);
+  transition: transform 300ms;
+}
+
+.alert2-enter {
+  transform: translateX(200%);
+}
+.alert2-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms;
+}
+.alert2-exit {
+  transform: translateX(200%);
+}
+
+.alert2-exit-active {
+  transform: translateX(0);
+  transition: transform 300ms;
 }

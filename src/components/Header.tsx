@@ -1,16 +1,20 @@
 import { useContext } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { AppDataContext } from '../context';
 
 function Header() {
   const context = useContext(AppDataContext);
+  const activeClass = ({ isActive }: { isActive: boolean }) => {
+    return isActive ? 'header__nav-li--show' : '';
+  };
 
   return (
     <header className="header">
       <div className="header__wrapper">
-        <a className="header__logo" id="logo" href="#no_scroll">
+        <Link className="header__logo" id="logo" to="/">
           <p>Fatina St PDR</p>
           <p>Удаление вмятин без покраски</p>
-        </a>
+        </Link>
         <div
           onClick={(e) => {
             e.stopPropagation();
@@ -40,14 +44,20 @@ function Header() {
               }
             }}
           >
-            <li className="header__nav-li header__nav-li--show">
-              <a href="#no_scroll">Главная</a>
+            <li className="header__nav-li">
+              <NavLink to="/" className={activeClass}>
+                Главная
+              </NavLink>
             </li>
             <li className="header__nav-li">
-              <a href="#works">Наши работы</a>
+              <NavLink to="works" className={activeClass}>
+                Наши работы
+              </NavLink>
             </li>
             <li className="header__nav-li">
-              <a href="#no_scroll">Цены</a>
+              <NavLink to="price" className={activeClass}>
+                Цены
+              </NavLink>
             </li>
             <li className="header__nav-li">
               <a href="#contact">Контакты</a>
