@@ -1,7 +1,18 @@
 html {
+  background: $background-color;
   box-sizing: border-box;
   min-width: $min-width;
   scroll-behavior: smooth;
+}
+#root {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+}
+main {
+  display: flex;
+  flex-direction: column;
 }
 *,
 *::before,
@@ -27,36 +38,4 @@ h2 {
   color: $title-color;
   letter-spacing: 1px;
   font-size: 1.7rem;
-}
-
-.alert-enter {
-  transform: translateX(-200%);
-}
-.alert-enter-active {
-  transform: translateX(0);
-  transition: transform 300ms;
-}
-.alert-exit {
-  transform: translateX(-200%);
-}
-
-.alert-exit-active {
-  transform: translateX(0);
-  transition: transform 300ms;
-}
-
-.alert2-enter {
-  transform: translateX(200%);
-}
-.alert2-enter-active {
-  transform: translateX(0);
-  transition: transform 300ms;
-}
-.alert2-exit {
-  transform: translateX(200%);
-}
-
-.alert2-exit-active {
-  transform: translateX(0);
-  transition: transform 300ms;
 }

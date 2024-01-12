@@ -1,5 +1,5 @@
-import { porschePng } from '../assets/img';
-import { phoneSvg, pointSvg, instSvg } from '../assets/svg';
+import { porschePng } from '../../assets/img';
+import { phoneSvg, pointSvg, instSvg } from '../../assets/svg';
 import { ReactSVG } from 'react-svg';
 import { CSSTransition } from 'react-transition-group';
 import { useEffect, useState } from 'react';
@@ -14,7 +14,7 @@ function Footer() {
   return (
     <footer className="footer" id="contact">
       <div className="footer__wrapper">
-        <CSSTransition in={anim} mountOnEnter classNames="alert" timeout={500}>
+        <CSSTransition in={anim} mountOnEnter classNames="--left" timeout={500}>
           <div className="footer__contacts">
             <h2>Контакты:</h2>
             <a href="https://www.instagram.com/galushkodmitriy?igsh=MXNnOXQzMm00dnNlbQ==">
@@ -35,7 +35,12 @@ function Footer() {
             </a>
           </div>
         </CSSTransition>
-        <CSSTransition in={anim} mountOnEnter classNames="alert2" timeout={500}>
+        <CSSTransition
+          in={anim}
+          mountOnEnter
+          classNames="--right"
+          timeout={500}
+        >
           <img className="footer__img" src={porschePng} alt="car" />
         </CSSTransition>
       </div>

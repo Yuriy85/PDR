@@ -12,10 +12,15 @@ function AboutSection() {
   return (
     <section className="about">
       <div className="about__wrapper">
-        <CSSTransition in={anim} mountOnEnter classNames="alert" timeout={500}>
+        <CSSTransition in={anim} mountOnEnter classNames="--left" timeout={500}>
           <img className="about_img" src={tools} alt="pdr tools" />
         </CSSTransition>
-        <CSSTransition in={anim} mountOnEnter classNames="alert2" timeout={500}>
+        <CSSTransition
+          in={anim}
+          mountOnEnter
+          classNames="--right"
+          timeout={500}
+        >
           <div className="about__content">
             <h2>Экономия средств и времени</h2>
             <p>

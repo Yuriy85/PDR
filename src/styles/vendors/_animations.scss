@@ -1,0 +1,29 @@
+.--left-enter {
+  transform: translateX(-200%);
+  &-active {
+    transform: translateX(0);
+    transition: transform 300ms;
+  }
+}
+.--left-exit {
+  &-active {
+    transform: translateX(0);
+    transition: transform 300ms;
+  }
+  transform: translateX(-200%);
+}
+
+.--right-enter {
+  transform: translateX(200%);
+  &-active {
+    transform: translateX(0);
+    transition: transform 300ms;
+  }
+}
+.--right-exit {
+  transform: translateX(200%);
+  &-active {
+    transform: translateX(0);
+    transition: transform 300ms;
+  }
+}

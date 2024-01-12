@@ -1,26 +1,3 @@
-@mixin on-event($self: false) {
-  @if $self {
-    &,
-    &:hover,
-    &:active,
-    &:focus,
-    &:focus-within {
-      @content;
-    }
-  } @else {
-    &:hover,
-    &:active,
-    &:focus,
-    &:focus-within {
-      @content;
-    }
-  }
-}
-@mixin when-inside($context) {
-  #{$context} & {
-    @content;
-  }
-}
 @mixin container {
   padding: 30px;
   display: flex;
@@ -35,5 +12,25 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+}
+@mixin button {
+  width: 207px;
+  height: 52px;
+  color: $text-color;
+  font-weight: bold;
+  border-radius: 100px;
+  border: 0px;
+  background: $brand-color;
+  letter-spacing: 1px;
+  transition: 0.5s;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: pointer;
+      filter: brightness(1.1);
+    }
+  }
+  &:disabled {
+    filter: opacity(0.5);
+    cursor: auto;
+  }
 }

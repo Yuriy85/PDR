@@ -14,7 +14,7 @@ function StartSection() {
   return (
     <section className="start">
       <div className="start__wrapper">
-        <CSSTransition in={anim} mountOnEnter classNames="alert" timeout={500}>
+        <CSSTransition in={anim} mountOnEnter classNames="--left" timeout={500}>
           <div className="start__content">
             <h1>Удаление вмятин без покраски</h1>
             <p>
@@ -24,10 +24,17 @@ function StartSection() {
               восстановления повреждений до состояния, которое было до
               повреждения
             </p>
-            <button onClick={() => navigate('works')}>Посмотреть работы</button>
+            <button className="start__button" onClick={() => navigate('works')}>
+              Посмотреть работы
+            </button>
           </div>
         </CSSTransition>
-        <CSSTransition in={anim} mountOnEnter classNames="alert2" timeout={500}>
+        <CSSTransition
+          in={anim}
+          mountOnEnter
+          classNames="--right"
+          timeout={500}
+        >
           <img className="start__img" src={startPdr} alt="pdr" />
         </CSSTransition>
       </div>

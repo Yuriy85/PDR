@@ -1,0 +1,20 @@
+.our-works__insert {
+  min-height: 120px;
+  background: $brand-gradient;
+}
+.our-works__loader {
+  margin: auto;
+  margin-top: 100px;
+  width: fit-content;
+}
+.our-works__wrapper {
+  min-height: 262px;
+}
+.our-works__button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.our-works__button {
+  @include button;
+  margin: 20px;
+}

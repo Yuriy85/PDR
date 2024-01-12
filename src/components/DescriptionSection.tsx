@@ -11,7 +11,7 @@ function DescriptionSection() {
   return (
     <section className="description">
       <div className="description__wrapper">
-        <CSSTransition in={anim} mountOnEnter classNames="alert" timeout={500}>
+        <CSSTransition in={anim} mountOnEnter classNames="--left" timeout={500}>
           <div className="description__content">
             <h2>Cохранность ЛКП</h2>
             <p>
@@ -28,7 +28,12 @@ function DescriptionSection() {
             </p>
           </div>
         </CSSTransition>
-        <CSSTransition in={anim} mountOnEnter classNames="alert2" timeout={500}>
+        <CSSTransition
+          in={anim}
+          mountOnEnter
+          classNames="--right"
+          timeout={500}
+        >
           <img className="description__img" src={beforeAfter} alt="pdr" />
         </CSSTransition>
       </div>

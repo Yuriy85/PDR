@@ -12,7 +12,7 @@ function WorksSection() {
 
   return (
     <section className="works">
-      <CSSTransition in={anim} mountOnEnter classNames="alert" timeout={500}>
+      <CSSTransition in={anim} mountOnEnter classNames="--left" timeout={500}>
         <div className="works__wrapper">
           <h2>Наши работы</h2>
           <Carousel showThumbs={false} infiniteLoop={true}>

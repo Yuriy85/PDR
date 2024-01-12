@@ -1,11 +1,16 @@
 import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { AppDataContext } from '../context';
+import { AppDataContext } from '../../context';
 
 function Header() {
   const context = useContext(AppDataContext);
   const activeClass = ({ isActive }: { isActive: boolean }) => {
     return isActive ? 'header__nav-li--show' : '';
+  };
+  const scrollToTopOptions: ScrollToOptions = {
+    top: 0,
+    left: 0,
+    behavior: 'smooth',
   };
 
   return (
@@ -38,19 +43,30 @@ function Header() {
           }
         >
           <ul
-            onClick={() => {
-              if (context.setShowBurger) {
+            onClick={(event) => {
+              if (
+                context.setShowBurger &&
+                (event.target as HTMLElement).nodeName === 'A'
+              ) {
                 context.setShowBurger(false);
               }
             }}
           >
             <li className="header__nav-li">
-              <NavLink to="/" className={activeClass}>
+              <NavLink
+                onClick={() => window.scrollTo(scrollToTopOptions)}
+                to="/"
+                className={activeClass}
+              >
                 Главная
               </NavLink>
             </li>
             <li className="header__nav-li">
-              <NavLink to="works" className={activeClass}>
+              <NavLink
+                onClick={() => window.scrollTo(scrollToTopOptions)}
+                to="works"
+                className={activeClass}
+              >
                 Наши работы
               </NavLink>
             </li>
