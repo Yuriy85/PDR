@@ -11,6 +11,7 @@ import data from '../data';
 
 function Works() {
   const navigate = useNavigate();
+  const [scrollToTop, setScrollToTop] = useState(false);
   const [videosId, setVideosId] = useState<string[]>([]);
   const [viewVideosId, setViewVideosId] = useState<string[]>([]);
   const [inView, setInView] = useState(false);
@@ -35,6 +36,18 @@ function Works() {
   }, [inView]);
 
   useEffect(() => {
+    const fn = () => {
+      if (window.pageYOffset > 1000) {
+        setScrollToTop(true);
+      } else {
+        setScrollToTop(false);
+      }
+    };
+    window.addEventListener('scroll', fn);
+    return () => window.removeEventListener('scroll', fn);
+  }, []);
+
+  useEffect(() => {
     if (error) {
       navigate(routesPath.error);
     } else {
@@ -50,6 +63,23 @@ function Works() {
         <TailSpin wrapperClass="our-works__loader" color="#f1cdb3" />
       ) : (
         <>
+          <div
+            onClick={() => {
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth',
+              });
+            }}
+            className={
+              scrollToTop
+                ? 'our-works__icon-to-top our-works__icon-to-top--show'
+                : 'our-works__icon-to-top'
+            }
+          >
+            <hr />
+            <hr />
+          </div>
           <TransitionGroup className={'our-works__wrapper'}>
             {viewVideosId.map((videoId, index) => (
               <CSSTransition classNames={'--left'} timeout={300} key={videoId}>
