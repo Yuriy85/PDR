@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AppDataContext } from '../../context';
+import routesPath from '../../router/routes';
 
 function Header() {
   const context = useContext(AppDataContext);
@@ -55,7 +56,7 @@ function Header() {
             <li className="header__nav-li">
               <NavLink
                 onClick={() => window.scrollTo(scrollToTopOptions)}
-                to="/"
+                to={routesPath.main}
                 className={activeClass}
               >
                 Главная
@@ -64,14 +65,14 @@ function Header() {
             <li className="header__nav-li">
               <NavLink
                 onClick={() => window.scrollTo(scrollToTopOptions)}
-                to="works"
+                to={routesPath.works}
                 className={activeClass}
               >
                 Наши работы
               </NavLink>
             </li>
             <li className="header__nav-li">
-              <NavLink to="price" className={activeClass}>
+              <NavLink to={routesPath.price} className={activeClass}>
                 Цены
               </NavLink>
             </li>

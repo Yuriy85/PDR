@@ -21,11 +21,7 @@ function Layout() {
       <main>
         <Outlet />
         <div
-          onClick={() => {
-            if (showBurger) {
-              setShowBurger(false);
-            }
-          }}
+          onClick={() => (showBurger ? setShowBurger(false) : null)}
           className={showBurger ? 'dark dark--show' : 'dark'}
         />
       </main>

@@ -6,6 +6,8 @@ import WorksItem from '../components/WorkItem';
 import { useFetching } from '../hooks/useFetching';
 import { InView } from 'react-intersection-observer';
 import { TailSpin } from 'react-loader-spinner';
+import routesPath from '../router/routes';
+import data from '../data';
 
 function Works() {
   const navigate = useNavigate();
@@ -13,16 +15,19 @@ function Works() {
   const [viewVideosId, setViewVideosId] = useState<string[]>([]);
   const [inView, setInView] = useState(false);
   const [idInPlay, setIdInPlay] = useState('');
-  const [getVideosData, loading, error] = useFetching(async (url) => {
-    const videos = await getVideos(url as string);
-    setVideosId(videos);
-  });
-  const addVideo = () => {
+  const [getVideosData, loading, error] = useFetching(
+    async (key, playlistId) => {
+      const videos = await getVideos(key as string, playlistId as string);
+      setViewVideosId(viewVideosId.concat([...videos].slice(0, 1)));
+      setVideosId([...videos].slice(1));
+    }
+  );
+  function addVideo() {
     if (videosId) {
       setViewVideosId(viewVideosId.concat([...videosId].slice(0, 1)));
       setVideosId([...videosId].slice(1));
     }
-  };
+  }
   useEffect(() => {
     if (inView && videosId.length && !window.location.hash) {
       addVideo();
@@ -31,10 +36,10 @@ function Works() {
 
   useEffect(() => {
     if (error) {
-      navigate('/error');
+      navigate(routesPath.error);
     } else {
-      getVideosData();
-      navigate('/works');
+      navigate(routesPath.works);
+      getVideosData(data.apiKey, data.playListId);
     }
   }, [error]);
 
@@ -47,11 +52,7 @@ function Works() {
         <>
           <TransitionGroup className={'our-works__wrapper'}>
             {viewVideosId.map((videoId, index) => (
-              <CSSTransition
-                classNames={!!(index % 2) ? '--left' : '--left'}
-                timeout={300}
-                key={videoId}
-              >
+              <CSSTransition classNames={'--left'} timeout={300} key={videoId}>
                 <WorksItem
                   id={videoId}
                   isEven={!!(index % 2)}
@@ -66,7 +67,7 @@ function Works() {
               disabled={!videosId.length}
               className="our-works__button"
               onClick={() => {
-                navigate('/works');
+                navigate(routesPath.works);
                 addVideo();
               }}
             >

@@ -1,14 +1,16 @@
 import axios from 'axios';
+import data from '../data';
 
 export const getVideos = async (
-  url = 'https://content-youtube.googleapis.com/youtube/v3/playlistItems'
+  key: string,
+  playlistId: string
 ): Promise<string[]> => {
   const videoIds: string[] = [];
   const results: Item[] = (
-    await axios.get(url, {
+    await axios.get(data.playListApi, {
       params: {
-        key: 'AIzaSyCkJRZ_7fr43gfQVrw8CuwWxmpwWUKCBFo',
-        playlistId: 'PLHri6D4H6-d79mD-9waX8WAxICRI_G5e-',
+        key,
+        playlistId,
         part: 'contentDetails',
         maxResults: 50,
       },
@@ -22,14 +24,14 @@ export const getVideos = async (
   return videoIds;
 };
 export const getDescriptionById = async (
-  id: string,
-  url = 'https://content-youtube.googleapis.com/youtube/v3/videos'
+  key: string,
+  id: string
 ): Promise<string[]> => {
   const results = (
-    await axios.get(url, {
+    await axios.get(data.videoApi, {
       params: {
         id,
-        key: 'AIzaSyCkJRZ_7fr43gfQVrw8CuwWxmpwWUKCBFo',
+        key,
         part: 'snippet',
       },
     })

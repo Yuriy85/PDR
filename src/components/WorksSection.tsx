@@ -2,9 +2,12 @@ import { Carousel } from 'react-responsive-carousel';
 import { car1, car2, car3, car4 } from '../assets/img';
 import { CSSTransition } from 'react-transition-group';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import routesPath from '../router/routes';
 
 function WorksSection() {
   const [anim, setAnim] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setAnim(true);
@@ -15,7 +18,11 @@ function WorksSection() {
       <CSSTransition in={anim} mountOnEnter classNames="--left" timeout={500}>
         <div className="works__wrapper">
           <h2>Наши работы</h2>
-          <Carousel showThumbs={false} infiniteLoop={true}>
+          <Carousel
+            onClickItem={() => navigate(routesPath.works)}
+            showThumbs={false}
+            infiniteLoop={true}
+          >
             <div>
               <img src={car1} />
             </div>

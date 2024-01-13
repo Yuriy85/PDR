@@ -4,11 +4,12 @@ import Main from './pages/Main';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/layout';
 import { routes } from './router';
+import routesPath from './router/routes';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter basename={import.meta.env.BASE_URL}>
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path={routesPath.main} element={<Layout />}>
         <Route index element={<Main />} />
         {routes.map((route) => (
           <Route

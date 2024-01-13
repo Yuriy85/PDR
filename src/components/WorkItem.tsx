@@ -3,6 +3,7 @@ import YouTube, { YouTubePlayer } from 'react-youtube';
 import { Bars } from 'react-loader-spinner';
 import { useFetching } from '../hooks/useFetching';
 import { getDescriptionById } from '../Api/getVideos';
+import data from '../data';
 
 function WorksItem({
   id,
@@ -19,12 +20,12 @@ function WorksItem({
   const [isPlay, setIsPlay] = useState(false);
   const [description, setDescription] = useState(['', '']);
   const [anim, setAnim] = useState(false);
-  const [getVideoDescription, loading, error] = useFetching(async (id) => {
-    const description = await getDescriptionById(id as string);
+  const [getVideoDescription, loading, error] = useFetching(async (key, id) => {
+    const description = await getDescriptionById(key as string, id as string);
     setDescription(description);
   });
   useEffect(() => {
-    getVideoDescription(id);
+    getVideoDescription(data.apiKey, id);
   }, []);
   useEffect(() => {
     if (isPlay && videoElement && id !== idInPlay) {
@@ -59,7 +60,7 @@ function WorksItem({
         />
 
         {loading ? (
-          <Bars visible={loading} color="#f1cdb3" />
+          <Bars color="#f1cdb3" />
         ) : (
           <div
             className={

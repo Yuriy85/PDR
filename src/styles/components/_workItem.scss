@@ -11,20 +11,22 @@
   min-height: 262px;
   justify-content: space-around;
   flex-direction: row-reverse;
-  flex-wrap: wrap-reverse;
   row-gap: 20px;
   column-gap: 30px;
   &--even {
     flex-direction: row;
   }
+  @media screen and (max-width: 767px) {
+    flex-wrap: wrap-reverse;
+  }
 }
 .work-item__wrapper-description {
-  max-width: 400px;
-  max-height: 364px;
+  max-width: 40%;
+  max-height: 300px;
   overflow: hidden;
   h2 {
+    margin-bottom: 15px;
     text-align: end;
-    margin-bottom: 5px;
   }
   p {
     color: $text-color;
@@ -34,7 +36,7 @@
       text-align: start;
     }
   }
-  @media screen and (max-width: 1129px) {
+  @media screen and (max-width: 767px) {
     max-width: 100%;
     h2 {
       text-align: center;

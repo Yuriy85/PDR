@@ -1,17 +1,19 @@
 import { useNavigate } from 'react-router-dom';
 import { reconstruction } from '../assets/img';
+import routesPath from '../router/routes';
 
 function Price() {
   const navigate = useNavigate();
 
   return (
-    <section style={{ minHeight: '100vh' }} className="start">
+    <section className="start start--price">
       <div className="start__wrapper">
-        <div style={{ minHeight: 'auto' }} className="start__content">
-          <h1 style={{ fontSize: '2rem' }}>
-            Извините. Страница c ценами еще не готова!
-          </h1>
-          <button className="start__button" onClick={() => navigate('/')}>
+        <div className="start__content">
+          <h1>Извините. Страница c ценами еще не готова!</h1>
+          <button
+            className="start__button"
+            onClick={() => navigate(routesPath.main)}
+          >
             На главную...
           </button>
         </div>
