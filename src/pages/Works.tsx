@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { getVideos } from '../Api/getVideos';
@@ -8,10 +8,12 @@ import { InView } from 'react-intersection-observer';
 import { TailSpin } from 'react-loader-spinner';
 import routesPath from '../router/routes';
 import data from '../data';
+import ScrollToTopButton from '../components/UI/ScrollTopButton';
+import { AppDataContext } from '../context';
 
 function Works() {
+  const { setError } = useContext(AppDataContext);
   const navigate = useNavigate();
-  const [scrollToTop, setScrollToTop] = useState(false);
   const [videosId, setVideosId] = useState<string[]>([]);
   const [viewVideosId, setViewVideosId] = useState<string[]>([]);
   const [inView, setInView] = useState(false);
@@ -19,39 +21,26 @@ function Works() {
   const [getVideosData, loading, error] = useFetching(
     async (key, playlistId) => {
       const videos = await getVideos(key as string, playlistId as string);
-      setViewVideosId(viewVideosId.concat([...videos].slice(0, 1)));
-      setVideosId([...videos].slice(1));
+      addVideo(videos);
     }
   );
-  function addVideo() {
-    if (videosId) {
-      setViewVideosId(viewVideosId.concat([...videosId].slice(0, 1)));
-      setVideosId([...videosId].slice(1));
-    }
+
+  function addVideo(videosId: string[]) {
+    setViewVideosId(viewVideosId.concat([...videosId].slice(0, 1)));
+    setVideosId([...videosId].slice(1));
   }
+
   useEffect(() => {
-    if (inView && videosId.length && !window.location.hash) {
-      addVideo();
+    if (inView && videosId.length) {
+      addVideo(videosId);
     }
   }, [inView]);
 
   useEffect(() => {
-    const fn = () => {
-      if (window.pageYOffset > 1000) {
-        setScrollToTop(true);
-      } else {
-        setScrollToTop(false);
-      }
-    };
-    window.addEventListener('scroll', fn);
-    return () => window.removeEventListener('scroll', fn);
-  }, []);
-
-  useEffect(() => {
     if (error) {
+      (setError as React.Dispatch<React.SetStateAction<string>>)(error);
       navigate(routesPath.error);
     } else {
-      navigate(routesPath.works);
       getVideosData(data.apiKey, data.playListId);
     }
   }, [error]);
@@ -63,23 +52,7 @@ function Works() {
         <TailSpin wrapperClass="our-works__loader" color="#f1cdb3" />
       ) : (
         <>
-          <div
-            onClick={() => {
-              window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: 'smooth',
-              });
-            }}
-            className={
-              scrollToTop
-                ? 'our-works__icon-to-top our-works__icon-to-top--show'
-                : 'our-works__icon-to-top'
-            }
-          >
-            <hr />
-            <hr />
-          </div>
+          <ScrollToTopButton className="our-works__icon-to-top" />
           <TransitionGroup className={'our-works__wrapper'}>
             {viewVideosId.map((videoId, index) => (
               <CSSTransition classNames={'--left'} timeout={300} key={videoId}>
@@ -88,6 +61,7 @@ function Works() {
                   isEven={!!(index % 2)}
                   idInPlay={idInPlay}
                   setIdInPlay={setIdInPlay}
+                  prevVideoId={viewVideosId[index - 1]}
                 />
               </CSSTransition>
             ))}
@@ -97,8 +71,7 @@ function Works() {
               disabled={!videosId.length}
               className="our-works__button"
               onClick={() => {
-                navigate(routesPath.works);
-                addVideo();
+                addVideo(videosId);
               }}
             >
               {!videosId.length ? 'Больше пока нет (' : 'Давай еще'}

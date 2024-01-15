@@ -1,10 +1,16 @@
+.our-works {
+  .our-works__icon-to-top {
+    @media screen and (max-width: 535px) {
+      right: 20px;
+    }
+  }
+}
 .our-works__insert {
   min-height: 120px;
   background: $brand-gradient;
 }
 .our-works__loader {
-  margin: auto;
-  margin-top: 100px;
+  margin: 100px auto;
   width: fit-content;
 }
 .our-works__wrapper {
@@ -17,23 +23,4 @@
 .our-works__button {
   @include button;
   margin: 20px;
-}
-.our-works__icon-to-top {
-  @include icon;
-  display: flex;
-  bottom: 25px;
-  transform: rotate(90deg);
-  scale: 0;
-  hr:last-child {
-    transform: rotate(30deg) translateX(-3px) translateY(-4px) scaleX(0.7);
-  }
-  hr:first-child {
-    transform: rotate(-30deg) translateX(-3px) translateY(4px) scaleX(0.7);
-  }
-  &:hover {
-    cursor: pointer;
-  }
-  &--show {
-    scale: 1;
-  }
 }

@@ -3,7 +3,7 @@ const routesPath: Routes = {
   works: '/works',
   price: '/price',
   error: '/error',
-  contacts: '#contact',
+  contacts: '/contacts',
 };
 export default routesPath;
 

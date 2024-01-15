@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { notFound } from '../assets/img';
 import { CSSTransition } from 'react-transition-group';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import routesPath from '../router/routes';
+import { AppDataContext } from '../context';
 
-function Error({ error }: { error?: string }) {
+function Error() {
+  const { error } = useContext(AppDataContext);
   const navigate = useNavigate();
   const [anim, setAnim] = useState(false);
 

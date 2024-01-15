@@ -1,23 +1,54 @@
-import { useNavigate } from 'react-router-dom';
-import { reconstruction } from '../assets/img';
-import routesPath from '../router/routes';
+import Form from 'react-bootstrap/Form';
+import { useState } from 'react';
 
 function Price() {
-  const navigate = useNavigate();
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    setValidated(true);
+  };
 
   return (
-    <section className="start start--price">
+    <section className="price start">
       <div className="start__wrapper">
         <div className="start__content">
-          <h1>Извините. Страница c ценами еще не готова!</h1>
-          <button
-            className="start__button"
-            onClick={() => navigate(routesPath.main)}
-          >
-            На главную...
-          </button>
+          <h1>Как узнать стоимость?</h1>
+          <p>
+            Заполните форму, отправьте нам и мы с вами свяжемся в ближайшее
+            время и сориентируем по стоимости. К сожалению, по фотографии можно
+            понять только примерную стоимость ремонта, так как зачастую
+            присланные фотографии плохого качества, либо сделаны под
+            неправильным ракурсом. Для точной оценки мастер должен увидеть
+            повреждение &quot;вживую&quot;.
+          </p>
         </div>
-        <img className="start__img" src={reconstruction} alt="pdr" />
+
+        <Form
+          validated={validated}
+          onSubmit={handleSubmit}
+          className="price__form"
+        >
+          <Form.Group className="mb-4" controlId="formBasicEmail">
+            <Form.Label>Как вас зовут?</Form.Label>
+            <Form.Control required type="text" placeholder="Введите имя" />
+          </Form.Group>
+          <Form.Group className="mb-4" controlId="formBasicEmail">
+            <Form.Label>Ваш телефон?</Form.Label>
+            <Form.Control required type="text" placeholder="Введите телефон" />
+          </Form.Group>
+          <Form.Group controlId="formFile" className="mb-4">
+            <Form.Label>Выберите фото</Form.Label>
+            <Form.Control required type="file" />
+          </Form.Group>
+          <button
+            style={{ borderRadius: '0.375rem' }}
+            type="submit"
+            className="start__button"
+          >
+            Отправить
+          </button>
+        </Form>
       </div>
     </section>
   );

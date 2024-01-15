@@ -1,12 +1,12 @@
-.work-item {
+.our-works__item {
   @include container;
   background-color: $background-color-extra;
   transition: 0.3s;
 }
-.work-item--even {
+.our-works__item--even {
   background-color: $background-color;
 }
-.work-item__wrapper {
+.our-works__item-wrapper {
   @include wrapper;
   min-height: 262px;
   justify-content: space-around;
@@ -20,7 +20,7 @@
     flex-wrap: wrap-reverse;
   }
 }
-.work-item__wrapper-description {
+.our-works__item-wrapper-description {
   max-width: 40%;
   max-height: 300px;
   overflow: hidden;
@@ -43,7 +43,7 @@
     }
   }
 }
-.work-item__youtube {
+.our-works__item-youtube {
   max-width: 640px;
   width: 100%;
   transition: opacity 2s;
@@ -52,7 +52,7 @@
     opacity: 1;
   }
 }
-.work-item__youtube-frame {
+.our-works__item-youtube-frame {
   max-width: inherit;
   width: inherit;
   height: auto;

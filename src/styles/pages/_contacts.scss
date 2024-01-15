@@ -1,0 +1,9 @@
+.contacts__insert {
+  min-height: 120px;
+  background: $brand-gradient;
+}
+.contacts__map {
+  min-height: calc(100vh - 340px);
+  width: 100%;
+  border: 0;
+}

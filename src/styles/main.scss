@@ -10,8 +10,8 @@
 @import
   'vendors/animations',
   'vendors/normalize',
+  'vendors/bootstrap.min',
   'vendors/carousel';
-
 // 3. Base stuff
 @import
   'base/base',
@@ -38,6 +38,7 @@
   'pages/error',
   'pages/price',
   'pages/work',
+  'pages/contacts',
   'pages/home';
 
 // 7. Themes

@@ -5,7 +5,9 @@ import { AppDataContext } from '../../context';
 import { useEffect, useState } from 'react';
 
 function Layout() {
+  const [error, setError] = useState('');
   const [showBurger, setShowBurger] = useState(false);
+  const [endVideoId, setEndVideoId] = useState('');
   const body = document.querySelector('body');
 
   useEffect(() => {
@@ -16,7 +18,16 @@ function Layout() {
   }, [showBurger]);
 
   return (
-    <AppDataContext.Provider value={{ showBurger, setShowBurger }}>
+    <AppDataContext.Provider
+      value={{
+        error,
+        setError,
+        showBurger,
+        setShowBurger,
+        endVideoId,
+        setEndVideoId,
+      }}
+    >
       <Header />
       <main>
         <Outlet />

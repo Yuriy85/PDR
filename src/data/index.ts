@@ -3,7 +3,7 @@ const data = {
   playListApi:
     'https://content-youtube.googleapis.com/youtube/v3/playlistItems',
   videoApi: 'https://content-youtube.googleapis.com/youtube/v3/videos',
-  playListId: 'RDQMgEzdN5RuCXE',
+  playListId: 'PLUwLZ9rnE_shlAxeK55ViLiRdK5RYZzD-',
 };
 
 export default data;

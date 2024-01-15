@@ -11,7 +11,7 @@
 }
 .footer__img {
   width: 100%;
-  max-width: 500px;
+  max-width: 380px;
   @media screen and (max-width: 800px) {
     align-self: center;
   }
@@ -24,7 +24,7 @@
 }
 
 .footer__contacts {
-  height: 234px;
+  height: 180px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

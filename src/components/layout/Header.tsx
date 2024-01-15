@@ -4,7 +4,7 @@ import { AppDataContext } from '../../context';
 import routesPath from '../../router/routes';
 
 function Header() {
-  const context = useContext(AppDataContext);
+  const { showBurger, setShowBurger } = useContext(AppDataContext);
   const activeClass = ({ isActive }: { isActive: boolean }) => {
     return isActive ? 'header__nav-li--show' : '';
   };
@@ -24,12 +24,12 @@ function Header() {
         <div
           onClick={(e) => {
             e.stopPropagation();
-            if (context.setShowBurger) {
-              context.setShowBurger(!context.showBurger);
+            if (setShowBurger) {
+              setShowBurger(!showBurger);
             }
           }}
           className={
-            context.showBurger
+            showBurger
               ? 'header__burger header__burger--show'
               : 'header__burger'
           }
@@ -40,16 +40,16 @@ function Header() {
         </div>
         <nav
           className={
-            context.showBurger ? 'header__nav header__nav--show' : 'header__nav'
+            showBurger ? 'header__nav header__nav--show' : 'header__nav'
           }
         >
           <ul
             onClick={(event) => {
               if (
-                context.setShowBurger &&
+                setShowBurger &&
                 (event.target as HTMLElement).nodeName === 'A'
               ) {
-                context.setShowBurger(false);
+                setShowBurger(false);
               }
             }}
           >
@@ -77,7 +77,9 @@ function Header() {
               </NavLink>
             </li>
             <li className="header__nav-li">
-              <a href="#contact">Контакты</a>
+              <NavLink to={routesPath.contacts} className={activeClass}>
+                Контакты
+              </NavLink>
             </li>
           </ul>
         </nav>

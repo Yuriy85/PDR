@@ -1,21 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import YouTube, { YouTubePlayer } from 'react-youtube';
 import { Bars } from 'react-loader-spinner';
 import { useFetching } from '../hooks/useFetching';
 import { getDescriptionById } from '../Api/getVideos';
 import data from '../data';
+import { AppDataContext } from '../context';
 
 function WorksItem({
   id,
   isEven,
   idInPlay,
   setIdInPlay,
+  prevVideoId,
 }: {
   id: string;
   isEven: boolean;
   idInPlay: string;
   setIdInPlay: React.Dispatch<React.SetStateAction<string>>;
+  prevVideoId: string;
 }) {
+  const { endVideoId, setEndVideoId } = useContext(AppDataContext);
   const [videoElement, setVideoElement] = useState<YouTubePlayer>();
   const [isPlay, setIsPlay] = useState(false);
   const [description, setDescription] = useState(['', '']);
@@ -32,13 +36,23 @@ function WorksItem({
       videoElement.target.pauseVideo();
     }
   }, [idInPlay]);
+  useEffect(() => {
+    if (endVideoId === prevVideoId) {
+      videoElement.target.playVideo();
+    }
+  }, [endVideoId]);
+
   return (
-    <div className={isEven ? 'work-item' : 'work-item work-item--even'}>
+    <div
+      className={
+        isEven ? 'our-works__item' : 'our-works__item our-works__item--even'
+      }
+    >
       <div
         className={
           !isEven
-            ? 'work-item__wrapper'
-            : 'work-item__wrapper work-item__wrapper--even'
+            ? 'our-works__item-wrapper'
+            : 'our-works__item-wrapper our-works__item-wrapper--even'
         }
       >
         <YouTube
@@ -50,12 +64,15 @@ function WorksItem({
             setVideoElement(event);
             setAnim(true);
           }}
+          onEnd={() =>
+            (setEndVideoId as React.Dispatch<React.SetStateAction<string>>)(id)
+          }
           className={
             anim
-              ? 'work-item__youtube work-item__youtube--active'
-              : 'work-item__youtube'
+              ? 'our-works__item-youtube our-works__item-youtube--active'
+              : 'our-works__item-youtube'
           }
-          iframeClassName="work-item__youtube-frame"
+          iframeClassName="our-works__item-youtube-frame"
           videoId={id}
         />
 
@@ -65,8 +82,8 @@ function WorksItem({
           <div
             className={
               isEven
-                ? 'work-item__wrapper-description'
-                : 'work-item__wrapper-description work-item__wrapper-description--even'
+                ? 'our-works__item-wrapper-description'
+                : 'our-works__item-wrapper-description our-works__item-wrapper-description--even'
             }
           >
             {error ? (

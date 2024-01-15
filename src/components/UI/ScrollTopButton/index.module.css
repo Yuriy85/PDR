@@ -1,0 +1,35 @@
+.button {
+  display: flex;
+  bottom: 25px;
+  transform: rotate(90deg);
+  scale: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 22px;
+  z-index: 4;
+  box-shadow: 0 0 5px 3px #4c4c4c99;
+  position: fixed;
+  right: 30px;
+  background: #4c4c4c85;
+  transition: 0.3s;
+}
+.button:hover {
+  cursor: pointer;
+}
+.firstHr {
+  margin: 0;
+  opacity: 1;
+  border: 1px solid #f1cdb3;
+  transform: rotate(-30deg) translateX(-3px) translateY(4px) scaleX(0.7);
+}
+.secondHr {
+  margin: 0;
+  opacity: 1;
+  border: 1px solid #f1cdb3;
+  transform: rotate(30deg) translateX(-3px) translateY(-4px) scaleX(0.7);
+}
+
+.buttonShow {
+  scale: 1;
+}
