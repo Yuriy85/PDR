@@ -1,0 +1,27 @@
+.button {
+  width: 207px;
+  height: 52px;
+  color: #4c4c4c;
+  font-weight: bold;
+  border-radius: 0.375rem;
+  border: 0;
+  background: #f1cdb3;
+  letter-spacing: 1px;
+  transition: 0.3s;
+  box-shadow: 0px 0px 3px 3px #00000030;
+}
+.button:disabled {
+  filter: opacity(0.5);
+  cursor: auto;
+  box-shadow: none;
+}
+.button:active {
+  box-shadow: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  button:hover {
+    cursor: pointer;
+    filter: brightness(1.1);
+  }
+}

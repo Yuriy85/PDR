@@ -8,11 +8,11 @@
 }
 .our-works__item-wrapper {
   @include wrapper;
-  min-height: 262px;
+  min-height: 16rem;
   justify-content: space-around;
   flex-direction: row-reverse;
-  row-gap: 20px;
-  column-gap: 30px;
+  row-gap: 1.2rem;
+  column-gap: 2rem;
   &--even {
     flex-direction: row;
   }
@@ -22,7 +22,7 @@
 }
 .our-works__item-wrapper-description {
   max-width: 40%;
-  max-height: 300px;
+  max-height: 19rem;
   overflow: hidden;
   h2 {
     margin-bottom: 15px;
@@ -44,7 +44,7 @@
   }
 }
 .our-works__item-youtube {
-  max-width: 640px;
+  max-width: 40rem;
   width: 100%;
   transition: opacity 2s;
   opacity: 0;

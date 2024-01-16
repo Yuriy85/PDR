@@ -1,9 +1,9 @@
 @mixin container {
-  padding: 30px;
+  padding: 2rem;
   display: flex;
   justify-content: center;
   @media screen and (max-width: 535px) {
-    padding: 20px;
+    padding: 1.2em;
   }
 }
 @mixin wrapper {
@@ -13,45 +13,42 @@
   align-items: center;
   justify-content: space-between;
 }
-@mixin button {
-  width: 207px;
-  height: 52px;
-  color: $text-color;
-  font-weight: bold;
-  border-radius: 0.375rem;
-  border: 0px;
-  background: $brand-color;
-  letter-spacing: 1px;
-  transition: 0.5s;
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      cursor: pointer;
-      filter: brightness(1.1);
-    }
+
+@mixin content {
+  max-width: 30rem;
+  p {
+    color: $text-color;
+    margin: 1rem 0;
   }
-  &:disabled {
-    filter: opacity(0.5);
-    cursor: auto;
+  @media screen and (max-width: 800px) {
+    max-width: none;
+  }
+}
+
+@mixin image {
+  width: 50%;
+  @media screen and (max-width: 800px) {
+    width: 100%;
   }
 }
 
 @mixin icon {
   flex-direction: column;
   justify-content: space-between;
-  width: 30px;
-  height: 22px;
+  width: 2rem;
+  height: 1.5rem;
   z-index: 4;
-  box-shadow: 0 0 5px 3px #4c4c4c99;
+  box-shadow: 0 0 0.3rem 0.2rem rgb(76 76 76 / 55%);
   position: fixed;
-  right: 30px;
+  right: 2rem;
   background: #4c4c4c85;
   transition: 0.3s;
   hr {
-    border: 1px solid $brand-color;
+    border: 0.1rem solid $brand-color;
     margin: 0;
     opacity: 1;
   }
   @media screen and (max-width: 535px) {
-    right: 20px;
+    right: 1.2em;
   }
 }

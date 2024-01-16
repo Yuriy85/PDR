@@ -1,5 +1,6 @@
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
+import BrandButton from '../components/UI/BrandButton';
 
 function Price() {
   const [validated, setValidated] = useState(false);
@@ -10,9 +11,9 @@ function Price() {
   };
 
   return (
-    <section className="price start">
-      <div className="start__wrapper">
-        <div className="start__content">
+    <div className="price">
+      <div className="price__wrapper">
+        <div className="price__content">
           <h1>Как узнать стоимость?</h1>
           <p>
             Заполните форму, отправьте нам и мы с вами свяжемся в ближайшее
@@ -41,16 +42,10 @@ function Price() {
             <Form.Label>Выберите фото</Form.Label>
             <Form.Control required type="file" />
           </Form.Group>
-          <button
-            style={{ borderRadius: '0.375rem' }}
-            type="submit"
-            className="start__button"
-          >
-            Отправить
-          </button>
+          <BrandButton type="submit">Отправить</BrandButton>
         </Form>
       </div>
-    </section>
+    </div>
   );
 }
 

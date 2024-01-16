@@ -10,6 +10,7 @@ import routesPath from '../router/routes';
 import data from '../data';
 import ScrollToTopButton from '../components/UI/ScrollTopButton';
 import { AppDataContext } from '../context';
+import BrandButton from '../components/UI/BrandButton';
 
 function Works() {
   const { setError } = useContext(AppDataContext);
@@ -67,7 +68,7 @@ function Works() {
             ))}
           </TransitionGroup>
           <InView className="our-works__button-wrapper" onChange={setInView}>
-            <button
+            <BrandButton
               disabled={!videosId.length}
               className="our-works__button"
               onClick={() => {
@@ -75,7 +76,7 @@ function Works() {
               }}
             >
               {!videosId.length ? 'Больше пока нет (' : 'Давай еще'}
-            </button>
+            </BrandButton>
           </InView>
         </>
       )}

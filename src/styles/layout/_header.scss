@@ -1,22 +1,21 @@
 .header {
   width: 100%;
-  min-width: 300px;
   position: absolute;
-  padding: 0 30px 0 30px;
+  padding: 0 2rem;
   a {
-    letter-spacing: 1px;
-    padding-bottom: 3px;
+    letter-spacing: 0.07rem;
+    padding-bottom: 0.2rem;
   }
   @media screen and (max-width: 535px) {
-    padding: 0 20px 0 20px;
+    padding: 0 1.2em;
   }
 }
 
 .header__wrapper {
   @include wrapper;
   margin: 0 auto;
-  min-width: 280px;
-  height: 120px;
+  min-width: 17rem;
+  height: 7rem;
 }
 
 .header__logo {
@@ -30,10 +29,10 @@
     letter-spacing: 0.15rem;
   }
   p:last-of-type {
-    margin: 10px 0;
+    margin: 0.7rem 0;
     color: $main-title-color;
     font-size: 0.85rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.07rem;
   }
 }
 
@@ -50,19 +49,19 @@
 }
 
 .header__nav {
-  height: 27px;
-  width: 443px;
+  height: 1.7rem;
+  width: 28rem;
   @media screen and (max-width: 767px) {
     display: flex;
     justify-content: center;
     align-items: center;
     background: #292929;
-    width: 320px;
+    width: 20em;
     height: 100vh;
     position: fixed;
     top: 0;
     right: 0;
-    transform: translateX(320px);
+    transform: translateX(20em);
     transition: 0.3s;
   }
   ul {
@@ -73,12 +72,12 @@
     @media screen and (max-width: 767px) {
       flex-direction: column;
       height: inherit;
-      max-height: 330px;
-      margin-right: 20px;
+      max-height: 21em;
+      margin-right: 1.2em;
     }
     a {
       @media screen and (max-width: 767px) {
-        font-size: 2rem;
+        font-size: 2em;
       }
     }
   }
@@ -91,7 +90,7 @@
         cursor: default;
         color: $anchor-color;
       }
-      border-bottom: 3px solid $brand-color;
+      border-bottom: 0.2em solid $brand-color;
     }
     @media (hover: hover) and (pointer: fine) {
       &:hover {
@@ -102,7 +101,7 @@
     }
   }
   &--show {
-    transform: translateX(0px);
+    transform: translateX(0);
     z-index: 3;
   }
 }

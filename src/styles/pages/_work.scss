@@ -1,26 +1,25 @@
 .our-works {
   .our-works__icon-to-top {
     @media screen and (max-width: 535px) {
-      right: 20px;
+      right: 1.2em;
     }
   }
 }
 .our-works__insert {
-  min-height: 120px;
+  min-height: 7rem;
   background: $brand-gradient;
 }
 .our-works__loader {
-  margin: 100px auto;
+  margin: 7rem auto;
   width: fit-content;
 }
 .our-works__wrapper {
-  min-height: 262px;
+  min-height: 16rem;
 }
 .our-works__button-wrapper {
   display: flex;
   justify-content: center;
 }
 .our-works__button {
-  @include button;
-  margin: 20px;
+  margin: 1.2rem;
 }

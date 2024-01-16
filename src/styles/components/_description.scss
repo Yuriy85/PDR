@@ -4,26 +4,16 @@
 
 .description__wrapper {
   @include wrapper;
-  gap: 10px;
+  gap: 1rem;
   @media screen and (max-width: 800px) {
     flex-direction: column;
   }
 }
 
 .description__content {
-  max-width: 450px;
-  p {
-    color: $text-color;
-    margin: 30px 0;
-  }
-  @media screen and (max-width: 800px) {
-    max-width: none;
-  }
+  @include content;
 }
 
 .description__img {
-  width: 50%;
-  @media screen and (max-width: 800px) {
-    width: 100%;
-  }
+  @include image;
 }

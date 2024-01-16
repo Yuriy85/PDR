@@ -11,7 +11,7 @@
 }
 .footer__img {
   width: 100%;
-  max-width: 380px;
+  max-width: 24rem;
   @media screen and (max-width: 800px) {
     align-self: center;
   }
@@ -24,22 +24,22 @@
 }
 
 .footer__contacts {
-  height: 180px;
+  height: 12rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   h2 {
     color: $main-title-color;
-    letter-spacing: 1px;
+    letter-spacing: 0.07rem;
   }
   a {
     display: flex;
     align-items: center;
     span {
       color: $brand-color;
-      letter-spacing: 1px;
+      letter-spacing: 0.07rem;
       font-size: 1.3rem;
-      margin-left: 10px;
+      margin-left: 0.7rem;
       transition: 0.5s;
     }
     @media (hover: hover) and (pointer: fine) {

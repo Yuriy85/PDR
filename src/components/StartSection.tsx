@@ -3,6 +3,7 @@ import { startPdr } from '../assets/img';
 import { CSSTransition } from 'react-transition-group';
 import { useEffect, useState } from 'react';
 import routesPath from '../router/routes';
+import BrandButton from './UI/BrandButton';
 
 function StartSection() {
   const navigate = useNavigate();
@@ -25,12 +26,9 @@ function StartSection() {
               восстановления повреждений до состояния, которое было до
               повреждения
             </p>
-            <button
-              className="start__button"
-              onClick={() => navigate(routesPath.works)}
-            >
+            <BrandButton onClick={() => navigate(routesPath.works)}>
               Посмотреть работы
-            </button>
+            </BrandButton>
           </div>
         </CSSTransition>
         <CSSTransition

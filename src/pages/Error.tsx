@@ -4,6 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 import { useContext, useEffect, useState } from 'react';
 import routesPath from '../router/routes';
 import { AppDataContext } from '../context';
+import BrandButton from '../components/UI/BrandButton';
 
 function Error() {
   const { error } = useContext(AppDataContext);
@@ -21,12 +22,9 @@ function Error() {
           <div className="start__content">
             <h1>Упс. Что-то пошло не так.</h1>
             <p>{error ? error : 'Проверьте пожалуйста адрес!'}</p>
-            <button
-              className="start__button"
-              onClick={() => navigate(routesPath.main)}
-            >
+            <BrandButton onClick={() => navigate(routesPath.main)}>
               На главную...
-            </button>
+            </BrandButton>
           </div>
         </CSSTransition>
         <CSSTransition
