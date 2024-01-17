@@ -1,13 +1,13 @@
 import axios from 'axios';
-import data from '../data';
 
 export const getVideos = async (
+  youTubeListApi: string,
   key: string,
   playlistId: string
 ): Promise<string[]> => {
   const videoIds: string[] = [];
   const results: Item[] = (
-    await axios.get(data.playListApi, {
+    await axios.get(youTubeListApi, {
       params: {
         key,
         playlistId,
@@ -24,11 +24,12 @@ export const getVideos = async (
   return videoIds;
 };
 export const getDescriptionById = async (
+  youTubeVideoApi: string,
   key: string,
   id: string
 ): Promise<string[]> => {
   const results = (
-    await axios.get(data.videoApi, {
+    await axios.get(youTubeVideoApi, {
       params: {
         id,
         key,

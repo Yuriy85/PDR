@@ -2,9 +2,9 @@
   @include container;
   background-color: $background-color-extra;
   transition: 0.3s;
-}
-.our-works__item--even {
-  background-color: $background-color;
+  &--even {
+    background-color: $background-color;
+  }
 }
 .our-works__item-wrapper {
   @include wrapper;

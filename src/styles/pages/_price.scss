@@ -42,6 +42,7 @@
   }
 }
 .price__form {
+  position: relative;
   max-width: 25rem;
   min-width: 17.5rem;
   width: 100%;
@@ -56,5 +57,6 @@
     width: 9rem;
     height: 2.5rem;
     margin-top: 1.2rem;
+    margin-bottom: 1rem
   }
 }

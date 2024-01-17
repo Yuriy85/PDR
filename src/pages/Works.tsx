@@ -1,27 +1,31 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { getVideos } from '../Api/getVideos';
+import { getVideos } from '../Api/youTube';
 import WorksItem from '../components/WorkItem';
 import { useFetching } from '../hooks/useFetching';
 import { InView } from 'react-intersection-observer';
 import { TailSpin } from 'react-loader-spinner';
-import routesPath from '../router/routes';
 import data from '../data';
 import ScrollToTopButton from '../components/UI/ScrollTopButton';
 import { AppDataContext } from '../context';
 import BrandButton from '../components/UI/BrandButton';
+import { routesPath } from '../router';
 
 function Works() {
-  const { setError } = useContext(AppDataContext);
   const navigate = useNavigate();
+  const { setError } = useContext(AppDataContext);
   const [videosId, setVideosId] = useState<string[]>([]);
   const [viewVideosId, setViewVideosId] = useState<string[]>([]);
   const [inView, setInView] = useState(false);
   const [idInPlay, setIdInPlay] = useState('');
   const [getVideosData, loading, error] = useFetching(
-    async (key, playlistId) => {
-      const videos = await getVideos(key as string, playlistId as string);
+    async (listApi, key, playlistId) => {
+      const videos = await getVideos(
+        listApi as string,
+        key as string,
+        playlistId as string
+      );
       addVideo(videos);
     }
   );
@@ -42,7 +46,7 @@ function Works() {
       (setError as React.Dispatch<React.SetStateAction<string>>)(error);
       navigate(routesPath.error);
     } else {
-      getVideosData(data.apiKey, data.playListId);
+      getVideosData(data.youTubeListApi, data.youTubeApiKey, data.playListId);
     }
   }, [error]);
 

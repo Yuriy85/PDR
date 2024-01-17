@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { notFound } from '../assets/img';
 import { CSSTransition } from 'react-transition-group';
 import { useContext, useEffect, useState } from 'react';
-import routesPath from '../router/routes';
 import { AppDataContext } from '../context';
 import BrandButton from '../components/UI/BrandButton';
+import { routesPath } from '../router';
 
 function Error() {
   const { error } = useContext(AppDataContext);

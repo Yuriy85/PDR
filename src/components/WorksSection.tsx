@@ -3,7 +3,7 @@ import { car1, car2, car3, car4 } from '../assets/img';
 import { CSSTransition } from 'react-transition-group';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import routesPath from '../router/routes';
+import { routesPath } from '../router';
 
 function WorksSection() {
   const [anim, setAnim] = useState(false);

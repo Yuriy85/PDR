@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AppDataContext } from '../../context';
-import routesPath from '../../router/routes';
+import { routesPath } from '../../router';
 
 function Header() {
   const { showBurger, setShowBurger } = useContext(AppDataContext);

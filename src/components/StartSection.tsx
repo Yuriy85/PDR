@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { startPdr } from '../assets/img';
 import { CSSTransition } from 'react-transition-group';
 import { useEffect, useState } from 'react';
-import routesPath from '../router/routes';
 import BrandButton from './UI/BrandButton';
+import { routesPath } from '../router';
 
 function StartSection() {
   const navigate = useNavigate();

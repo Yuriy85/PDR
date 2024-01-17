@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import YouTube, { YouTubePlayer } from 'react-youtube';
 import { Bars } from 'react-loader-spinner';
 import { useFetching } from '../hooks/useFetching';
-import { getDescriptionById } from '../Api/getVideos';
+import { getDescriptionById } from '../Api/youTube';
 import data from '../data';
 import { AppDataContext } from '../context';
 
@@ -24,12 +24,18 @@ function WorksItem({
   const [isPlay, setIsPlay] = useState(false);
   const [description, setDescription] = useState(['', '']);
   const [anim, setAnim] = useState(false);
-  const [getVideoDescription, loading, error] = useFetching(async (key, id) => {
-    const description = await getDescriptionById(key as string, id as string);
-    setDescription(description);
-  });
+  const [getVideoDescription, loading, error] = useFetching(
+    async (api, key, id) => {
+      const description = await getDescriptionById(
+        api as string,
+        key as string,
+        id as string
+      );
+      setDescription(description);
+    }
+  );
   useEffect(() => {
-    getVideoDescription(data.apiKey, id);
+    getVideoDescription(data.youTubeVideoApi, data.youTubeApiKey, id);
   }, []);
   useEffect(() => {
     if (isPlay && videoElement && id !== idInPlay) {

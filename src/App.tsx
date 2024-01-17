@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom/client';
 import Main from './pages/Main';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/layout';
-import { routes } from './router';
-import routesPath from './router/routes';
+import { routes, routesPath } from './router';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter basename={import.meta.env.BASE_URL}>
