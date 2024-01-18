@@ -2,28 +2,28 @@
   transform: translateX(-200%);
   &-active {
     transform: translateX(0);
-    transition: transform 300ms;
+    transition:  500ms;
   }
 }
 .--left-exit {
   &-active {
     transform: translateX(0);
-    transition: transform 300ms;
+    transition:  500ms;
   }
   transform: translateX(-200%);
 }
 
 .--right-enter {
-  transform: translateX(200%);
+  scale: 0;
   &-active {
-    transform: translateX(0);
-    transition: transform 300ms;
+    scale: 1;
+    transition:  500ms;
   }
 }
 .--right-exit {
-  transform: translateX(200%);
+  scale: 0;
   &-active {
-    transform: translateX(0);
-    transition: transform 300ms;
+    scale: 1;
+    transition:  500ms;
   }
 }

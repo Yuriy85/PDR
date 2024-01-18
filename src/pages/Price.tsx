@@ -1,42 +1,44 @@
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import BrandButton from '../components/UI/BrandButton';
 import { useFetching } from '../hooks/useFetching';
-import { sendMessage, sendPhoto } from '../Api/telegram';
+import { sendMessage, sendFile } from '../Api/telegram';
 import Alert from 'react-bootstrap/Alert';
 import { Form } from 'react-bootstrap';
 import data from '../data';
 
 function Price() {
   const refInput = useRef(null);
-  const refPhotoInput = useRef(null);
+  const refFileInput = useRef(null);
   const [tel, setTel] = useState('');
+  const [isWrongFile, setIsWrongFile] = useState(false);
   const [validated, setValidated] = useState(false);
   const [successAlert, setSuccessAlert] = useState(false);
   const [dangerAlert, setDangerAlert] = useState(false);
 
   const [sendForm, isLoading, error] = useFetching(
-    async (token, tgMessageApi, tgPhotoApi, chatId, text, photo) => {
+    async (token, tgMessageApi, tgFileApi, chatId, text, photo, fileType?) => {
       await sendMessage(
         token as string,
         tgMessageApi as string,
         chatId as string,
         text as string
       );
-      await sendPhoto(
+      await sendFile(
         token as string,
-        tgPhotoApi as string,
+        tgFileApi as string,
         chatId as string,
-        photo as File
+        photo as File,
+        fileType as string
       );
       setSuccessAlert(true);
+      setValidated(false);
+      if (refInput.current && refFileInput.current) {
+        (refInput.current as HTMLInputElement).value = '';
+        (refFileInput.current as HTMLInputElement).value = '';
+      }
       setTimeout(() => {
         setSuccessAlert(false);
-        setValidated(false);
-        if (refInput.current && refPhotoInput.current) {
-          (refInput.current as HTMLInputElement).value = '';
-          (refPhotoInput.current as HTMLInputElement).value = '';
-        }
-      }, 1500);
+      }, 3000);
     }
   );
 
@@ -46,7 +48,7 @@ function Price() {
       setTimeout(() => {
         setDangerAlert(false);
         setValidated(false);
-      }, 1500);
+      }, 3000);
     }
   }, [error]);
 
@@ -62,16 +64,40 @@ function Price() {
     const tel = (event as unknown as BootstrapFormEvent).target[1].value;
     const extra = (event as unknown as BootstrapFormEvent).target[2].value;
     const message = `<b>${name}</b>\n\n<a href="${tel}">${tel}</a>\n\n<i>${extra}</i>`;
-    const photo = (event as unknown as BootstrapFormEvent).target[3].files[0];
+    const file = (event as unknown as BootstrapFormEvent).target[3].files[0];
 
-    sendForm(
-      data.tgToken,
-      data.tgMessageApi,
-      data.tgPhotoApi,
-      data.chatId,
-      message,
-      photo
-    );
+    if (file.type.includes('video')) {
+      sendForm(
+        data.tgToken,
+        data.tgMessageApi,
+        data.tgVideoApi,
+        data.chatId,
+        message,
+        file,
+        'video'
+      );
+    } else if (file.type.includes('image')) {
+      sendForm(
+        data.tgToken,
+        data.tgMessageApi,
+        data.tgPhotoApi,
+        data.chatId,
+        message,
+        file
+      );
+    } else {
+      setIsWrongFile(true);
+    }
+  }
+
+  function checkTel(event: ChangeEvent<HTMLInputElement>) {
+    event.preventDefault();
+    const tel = (event.target as HTMLInputElement).value;
+    setTel('+375');
+    if (isNaN(+tel) || tel.length <= 4) {
+      return;
+    }
+    setTel(tel);
   }
 
   return (
@@ -92,7 +118,10 @@ function Price() {
         <Form
           validated={validated}
           onSubmit={handleSubmit}
-          onChange={() => (!validated ? setValidated(true) : null)}
+          onChange={() => {
+            !validated ? setValidated(true) : null;
+            isWrongFile ? setIsWrongFile(false) : null;
+          }}
           className="price__form"
         >
           <Form.Group className="mb-4">
@@ -103,15 +132,7 @@ function Price() {
             <Form.Label>Ваш телефон*</Form.Label>
             <Form.Control
               value={tel}
-              onChange={(e) => {
-                e.preventDefault();
-                const value = e.target.value;
-                setTel('+375');
-                if (isNaN(+value) || value.length <= 4) {
-                  return;
-                }
-                setTel(value);
-              }}
+              onChange={checkTel}
               minLength={13}
               maxLength={13}
               required
@@ -123,25 +144,27 @@ function Price() {
             <Form.Control ref={refInput} placeholder="Опишите, если нужно" />
           </Form.Group>
           <Form.Group controlId="formFile" className="mb-4">
-            <Form.Label>Выберите фото*</Form.Label>
-            <Form.Control ref={refPhotoInput} required type="file" />
+            <Form.Label>Выберите фото/видео (до 10mb/50mb)*</Form.Label>
+            <Form.Control
+              ref={refFileInput}
+              isInvalid={isWrongFile}
+              required
+              type="file"
+            />
           </Form.Group>
           <BrandButton disabled={isLoading} type="submit">
-            Отправить
+            {isLoading ? 'Отправляю...' : 'Отправить'}
           </BrandButton>
           <Alert
             style={{ position: 'absolute' }}
-            show={successAlert}
-            variant="success"
+            show={successAlert || dangerAlert || isWrongFile}
+            variant={dangerAlert || isWrongFile ? 'danger' : 'success'}
           >
-            Сообщение отправлено, скоро мы вам перезвоним
-          </Alert>
-          <Alert
-            style={{ position: 'absolute' }}
-            show={dangerAlert}
-            variant="danger"
-          >
-            {error}
+            {successAlert
+              ? 'Сообщение отправлено, скоро мы вам перезвоним'
+              : `Сообщение не отправлено! ${
+                  isWrongFile ? 'Проверьте формат файла' : error
+                }`}
           </Alert>
         </Form>
       </div>

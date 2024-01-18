@@ -60,7 +60,7 @@ function Works() {
           <ScrollToTopButton className="our-works__icon-to-top" />
           <TransitionGroup className={'our-works__wrapper'}>
             {viewVideosId.map((videoId, index) => (
-              <CSSTransition classNames={'--left'} timeout={300} key={videoId}>
+              <CSSTransition classNames={'--left'} timeout={500} key={videoId}>
                 <WorksItem
                   id={videoId}
                   isEven={!!(index % 2)}

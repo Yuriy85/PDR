@@ -50,6 +50,12 @@
   font-size: 1.2rem;
   letter-spacing: 0.07rem;
   color: #cdcdcd;
+  .form-control{
+    &:focus{
+      border-color: $brand-color;
+      box-shadow: 0 0 0.25rem 0.25rem #f1cdb338;
+    }
+  }
   input {
     background-color: #f2eeea;
   }

@@ -13,20 +13,25 @@ export const sendMessage = async (
   });
 };
 
-export const sendPhoto = async (
+export const sendFile = async (
   token: string,
   tgApi: string,
   chat_id: string,
-  photo: File
+  file: File,
+  fileType?: string
 ) => {
-  // console.log(chat_idphoto);
+  const photoParameter = {
+    chat_id,
+    photo: file,
+  };
+  const videoParameter = {
+    chat_id,
+    video: file,
+  };
 
   await axios.post(
     tgApi.replace('<token>', token),
-    {
-      chat_id,
-      photo,
-    },
+    fileType ? videoParameter : photoParameter,
     {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -34,18 +39,3 @@ export const sendPhoto = async (
     }
   );
 };
-
-// axios.post(
-//   'https://httpbin.org/post',
-//   {
-//     user: {
-//       name: 'Dmitriy',
-//     },
-//     file: fs.createReadStream('/foo/bar.jpg'),
-//   },
-//   {
-//     headers: {
-//       'Content-Type': 'multipart/form-data',
-//     },
-//   }
-// );

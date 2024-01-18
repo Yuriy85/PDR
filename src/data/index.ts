@@ -6,6 +6,7 @@ const data = {
   playListId: 'PLUwLZ9rnE_shlAxeK55ViLiRdK5RYZzD-',
   tgMessageApi: 'https://api.telegram.org/bot<token>/sendMessage',
   tgPhotoApi: 'https://api.telegram.org/bot<token>/sendPhoto',
+  tgVideoApi: 'https://api.telegram.org/bot<token>/sendVideo',
   tgToken: '6705774117:AAGp9aWwe77NcamsT827leQeRcPlqpKEOZc',
   chatId: '-1002070380082',
 };
