@@ -17,18 +17,18 @@ function Price() {
 
   const [sendForm, isLoading, error] = useFetching(
     async (token, tgMessageApi, tgFileApi, chatId, text, photo, fileType?) => {
-      await sendMessage(
-        token as string,
-        tgMessageApi as string,
-        chatId as string,
-        text as string
-      );
       await sendFile(
         token as string,
         tgFileApi as string,
         chatId as string,
         photo as File,
         fileType as string
+      );
+      await sendMessage(
+        token as string,
+        tgMessageApi as string,
+        chatId as string,
+        text as string
       );
       setSuccessAlert(true);
       setValidated(false);
