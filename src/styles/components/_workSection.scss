@@ -2,9 +2,12 @@
   background: $background-color;
   @include container;
 }
-
 .works__wrapper {
   max-width: $max-width;
+  width: 100%;
+  img {
+    width: 100%;
+  }
   h2 {
     margin-bottom: 2rem;
   }

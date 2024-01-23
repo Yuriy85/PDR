@@ -8,6 +8,7 @@ import car3 from './car_3.jpg';
 import car4 from './car_4.jpg';
 import reconstruction from './reconstruction.png';
 import notFound from './not_found.png';
+import empty from './empty.png';
 
 export {
   porschePng,
@@ -20,4 +21,5 @@ export {
   car4,
   reconstruction,
   notFound,
+  empty,
 };

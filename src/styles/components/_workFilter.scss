@@ -1,0 +1,18 @@
+.our-works__filter {
+  max-width: $max-width;
+  margin: auto;
+  @include container;
+
+  gap: 2rem;
+  @media screen and (max-width: 767px) {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+.our-works__select,
+.our-works__search {
+  @include formItem;
+  background-color: $background-color;
+  color: $title-color;
+  font-family: $anchor-font-stack;
+}

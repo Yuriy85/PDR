@@ -18,7 +18,7 @@ function Error() {
   return (
     <section className="start start--error">
       <div className="start__wrapper">
-        <CSSTransition in={anim} mountOnEnter classNames="--left" timeout={500}>
+        <CSSTransition in={anim} mountOnEnter classNames="--left" timeout={300}>
           <div className="start__content">
             <h1>Упс. Что-то пошло не так.</h1>
             <p>{error ? error : 'Проверьте пожалуйста адрес!'}</p>
@@ -31,7 +31,7 @@ function Error() {
           in={anim}
           mountOnEnter
           classNames="--right"
-          timeout={500}
+          timeout={700}
         >
           <img className="start__img" src={notFound} alt="pdr" />
         </CSSTransition>

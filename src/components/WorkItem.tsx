@@ -1,90 +1,59 @@
 import { useContext, useEffect, useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import YouTube, { YouTubePlayer } from 'react-youtube';
-import { Bars } from 'react-loader-spinner';
-import { useFetching } from '../hooks/useFetching';
-import { getDescriptionById } from '../Api/youTube';
-import data from '../data';
+import { VideoSnippet } from '../Api/youTube';
 import { AppDataContext } from '../context';
 
-function WorksItem({
-  id,
-  isEven,
-  idInPlay,
-  setIdInPlay,
-  prevVideoId,
-}: {
-  id: string;
-  isEven: boolean;
-  idInPlay: string;
-  setIdInPlay: React.Dispatch<React.SetStateAction<string>>;
-  prevVideoId: string;
-}) {
-  const { endVideoId, setEndVideoId } = useContext(AppDataContext);
+function WorkItem({ video, isEven }: { video: VideoSnippet; isEven: boolean }) {
+  const { idInPlay, setIdInPlay } = useContext(AppDataContext);
   const [videoElement, setVideoElement] = useState<YouTubePlayer>();
   const [isPlay, setIsPlay] = useState(false);
-  const [description, setDescription] = useState(['', '']);
   const [anim, setAnim] = useState(false);
-  const [getVideoDescription, loading, error] = useFetching(
-    async (api, key, id) => {
-      const description = await getDescriptionById(
-        api as string,
-        key as string,
-        id as string
-      );
-      setDescription(description);
+  const [mount, setMount] = useState(false);
+  const videoId = video.resourceId.videoId;
+
+  useEffect(() => {
+    if (!mount) {
+      setMount(true);
     }
-  );
-  useEffect(() => {
-    getVideoDescription(data.youTubeVideoApi, data.youTubeApiKey, id);
-  }, []);
-  useEffect(() => {
-    if (isPlay && videoElement && id !== idInPlay) {
+    if (isPlay && videoId !== idInPlay) {
       videoElement.target.pauseVideo();
     }
-  }, [idInPlay]);
-  useEffect(() => {
-    if (endVideoId === prevVideoId) {
-      videoElement.target.playVideo();
-    }
-  }, [endVideoId]);
+  }, [idInPlay, isPlay]);
 
   return (
-    <div
-      className={
-        isEven ? 'our-works__item' : 'our-works__item our-works__item--even'
-      }
-    >
+    <CSSTransition in={mount} timeout={300} classNames="--left">
       <div
         className={
-          !isEven
-            ? 'our-works__item-wrapper'
-            : 'our-works__item-wrapper our-works__item-wrapper--even'
+          isEven ? 'our-works__item' : 'our-works__item our-works__item--even'
         }
       >
-        <YouTube
-          onPlay={() => {
-            setIsPlay(true);
-            setIdInPlay(id);
-          }}
-          onReady={(event) => {
-            setVideoElement(event);
-            setAnim(true);
-          }}
-          onEnd={() =>
-            (setEndVideoId as React.Dispatch<React.SetStateAction<string>>)(id)
-          }
+        <div
           className={
-            anim
-              ? 'our-works__item-youtube our-works__item-youtube--active'
-              : 'our-works__item-youtube'
+            !isEven
+              ? 'our-works__item-wrapper'
+              : 'our-works__item-wrapper our-works__item-wrapper--even'
           }
-          iframeClassName="our-works__item-youtube-frame"
-          videoId={id}
-        />
-
-        {loading ? (
-          <Bars color="#f1cdb3" />
-        ) : (
+        >
+          <YouTube
+            onPlay={() => {
+              setIsPlay(true);
+              (setIdInPlay as React.Dispatch<React.SetStateAction<string>>)(
+                videoId
+              );
+            }}
+            onReady={(event) => {
+              setVideoElement(event);
+              setAnim(true);
+            }}
+            className={
+              anim
+                ? 'our-works__item-youtube our-works__item-youtube--active'
+                : 'our-works__item-youtube'
+            }
+            iframeClassName="our-works__item-youtube-frame"
+            videoId={videoId}
+          />
           <div
             className={
               isEven
@@ -92,19 +61,13 @@ function WorksItem({
                 : 'our-works__item-wrapper-description our-works__item-wrapper-description--even'
             }
           >
-            {error ? (
-              <p>{error}</p>
-            ) : (
-              <>
-                <h2>{description[0]}</h2>
-                <p>{description[1]}</p>
-              </>
-            )}
+            <h2>{video.title}</h2>
+            <p>{video.description}</p>
           </div>
-        )}
+        </div>
       </div>
-    </div>
+    </CSSTransition>
   );
 }
 
-export default WorksItem;
+export default WorkItem;

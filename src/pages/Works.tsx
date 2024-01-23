@@ -1,24 +1,31 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { getVideos } from '../Api/youTube';
-import WorksItem from '../components/WorkItem';
+import { getVideos, VideoSnippet } from '../Api/youTube';
+import WorkItem from '../components/WorkItem';
 import { useFetching } from '../hooks/useFetching';
-import { InView } from 'react-intersection-observer';
-import { TailSpin } from 'react-loader-spinner';
 import data from '../data';
 import ScrollToTopButton from '../components/UI/ScrollTopButton';
 import { AppDataContext } from '../context';
-import BrandButton from '../components/UI/BrandButton';
 import { routesPath } from '../router';
+import Spinner from 'react-bootstrap/esm/Spinner';
+import WorkFilter from '../components/WorkFilter';
+import WorkPagination from '../components/WorkPagination';
+import { empty } from '../assets/img';
+import { CSSTransition } from 'react-transition-group';
+import useObserver from '../hooks/useObserver';
 
 function Works() {
-  const navigate = useNavigate();
   const { setError } = useContext(AppDataContext);
-  const [videosId, setVideosId] = useState<string[]>([]);
-  const [viewVideosId, setViewVideosId] = useState<string[]>([]);
-  const [inView, setInView] = useState(false);
-  const [idInPlay, setIdInPlay] = useState('');
+  const navigate = useNavigate();
+  const lastElement = useRef(null);
+  const [autoScroll, setAutoScroll] = useState(true);
+  const [showWheel, setShowWheel] = useState(false);
+  const [countPerPage, setCountPerPage] = useState(2);
+  const [page, setPage] = useState(1);
+  const [paginateVideos, setPaginateVideos] = useState<VideoSnippet[]>([]);
+  const [buttonNumbers, setButtonNumbers] = useState<number[]>([]);
+  const [videos, setVideos] = useState<VideoSnippet[]>([]);
+  const inView = useObserver(lastElement, autoScroll);
   const [getVideosData, loading, error] = useFetching(
     async (listApi, key, playlistId) => {
       const videos = await getVideos(
@@ -26,64 +33,75 @@ function Works() {
         key as string,
         playlistId as string
       );
-      addVideo(videos);
+      setVideos(videos);
     }
   );
 
-  function addVideo(videosId: string[]) {
-    setViewVideosId(viewVideosId.concat([...videosId].slice(0, 1)));
-    setVideosId([...videosId].slice(1));
-  }
-
   useEffect(() => {
-    if (inView && videosId.length) {
-      addVideo(videosId);
-    }
-  }, [inView]);
-
-  useEffect(() => {
-    if (error) {
-      (setError as React.Dispatch<React.SetStateAction<string>>)(error);
+    if (error && setError) {
       navigate(routesPath.error);
+      setError(error);
     } else {
       getVideosData(data.youTubeListApi, data.youTubeApiKey, data.playListId);
     }
   }, [error]);
 
+  useEffect(() => {
+    if (lastElement && inView) {
+      setCountPerPage(countPerPage + 1);
+    }
+  }, [inView]);
+
   return (
     <div className="our-works">
       <div className="our-works__insert"></div>
-      {loading ? (
-        <TailSpin wrapperClass="our-works__loader" color="#f1cdb3" />
-      ) : (
-        <>
-          <ScrollToTopButton className="our-works__icon-to-top" />
-          <TransitionGroup className={'our-works__wrapper'}>
-            {viewVideosId.map((videoId, index) => (
-              <CSSTransition classNames={'--left'} timeout={500} key={videoId}>
-                <WorksItem
-                  id={videoId}
-                  isEven={!!(index % 2)}
-                  idInPlay={idInPlay}
-                  setIdInPlay={setIdInPlay}
-                  prevVideoId={viewVideosId[index - 1]}
-                />
-              </CSSTransition>
-            ))}
-          </TransitionGroup>
-          <InView className="our-works__button-wrapper" onChange={setInView}>
-            <BrandButton
-              disabled={!videosId.length}
-              className="our-works__button"
-              onClick={() => {
-                addVideo(videosId);
-              }}
-            >
-              {!videosId.length ? 'Больше пока нет (' : 'Давай еще'}
-            </BrandButton>
-          </InView>
-        </>
-      )}
+      <div>
+        <WorkFilter
+          setPaginateVideos={setPaginateVideos}
+          setButtonNumbers={setButtonNumbers}
+          setCountPerPage={setCountPerPage}
+          setAutoScroll={setAutoScroll}
+          setShowWheel={setShowWheel}
+          setVideos={setVideos}
+          setPage={setPage}
+          countPerPage={countPerPage}
+          autoScroll={autoScroll}
+          videos={videos}
+          page={page}
+        />
+        <div
+          className={
+            loading
+              ? 'our-works__loader our-works__loader--show'
+              : 'our-works__loader'
+          }
+        >
+          <Spinner animation="border" />
+        </div>
+        {paginateVideos.map((video, index) => (
+          <WorkItem key={video.title} video={video} isEven={!!(index % 2)} />
+        ))}
+        <CSSTransition
+          unmountOnExit
+          in={showWheel}
+          timeout={3000}
+          classNames="--wheel"
+        >
+          <img src={empty} />
+        </CSSTransition>
+        <div ref={lastElement}></div>
+        {videos.length !== paginateVideos.length && !showWheel ? (
+          <WorkPagination
+            setCountPerPage={setCountPerPage}
+            setPage={setPage}
+            buttonNumbers={buttonNumbers}
+            countPerPage={countPerPage}
+            autoScroll={autoScroll}
+            page={page}
+          />
+        ) : null}
+        <ScrollToTopButton className="our-works__icon-to-top" />
+      </div>
     </div>
   );
 }

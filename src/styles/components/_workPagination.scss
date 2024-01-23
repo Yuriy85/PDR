@@ -1,0 +1,22 @@
+.our-works__pagination {
+  a {
+    color: $title-color;
+    &:focus {
+      border-color: #f1cdb3;
+      box-shadow: 0 0 0.25rem 0.25rem rgba(241, 205, 179, 0.5);
+      color: $title-color;
+    }
+    &:hover {
+      color: $title-color;
+    }
+  }
+  .active span {
+    color: $title-color;
+    background-color: $brand-color;
+    border-color: $brand-color;
+  }
+
+  margin: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}

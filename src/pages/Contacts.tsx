@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { TailSpin } from 'react-loader-spinner';
+import Spinner from 'react-bootstrap/esm/Spinner';
+import data from '../data';
 
 function Contacts() {
   const [isLoading, setIsLoading] = useState(true);
@@ -7,14 +8,16 @@ function Contacts() {
     <div className="contacts">
       <div className="contacts__insert"></div>
       {isLoading && (
-        <TailSpin wrapperClass="contacts__spinner" color="#f1cdb3" />
+        <div className="contacts__spinner">
+          <Spinner animation="border" />
+        </div>
       )}
       <iframe
         onLoad={() => setIsLoading(false)}
         className={
           isLoading ? 'contacts__map' : 'contacts__map contacts__map--active'
         }
-        src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2796.544154523444!2d30.380535546601752!3d53.88546853276153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNTPCsDUzJzA4LjEiTiAzMMKwMjInNTcuOSJF!5e0!3m2!1sru!2sby!4v1705236122533!5m2!1sru!2sby"
+        src={data.googleMapApi}
         loading="lazy"
         referrerPolicy={'no-referrer-when-downgrade'}
         allowFullScreen={false}

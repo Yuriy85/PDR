@@ -7,6 +7,13 @@ import { Form } from 'react-bootstrap';
 import data from '../data';
 
 function Price() {
+  type BootstrapFormEvent = {
+    target: {
+      files: File[];
+      value: string;
+    }[];
+  };
+
   const refInput = useRef(null);
   const refFileInput = useRef(null);
   const [tel, setTel] = useState('');
@@ -52,19 +59,16 @@ function Price() {
     }
   }, [error]);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    type BootstrapFormEvent = {
-      target: {
-        files: File[];
-        value: string;
-      }[];
-    };
-    const name = (event as unknown as BootstrapFormEvent).target[0].value;
-    const tel = (event as unknown as BootstrapFormEvent).target[1].value;
-    const extra = (event as unknown as BootstrapFormEvent).target[2].value;
+  function handleSubmit(
+    event: FormEvent<HTMLFormElement> | BootstrapFormEvent
+  ) {
+    (event as FormEvent<HTMLFormElement>).preventDefault();
+    const bootstrapEvent: BootstrapFormEvent = event as BootstrapFormEvent;
+    const name = bootstrapEvent.target[0].value;
+    const tel = bootstrapEvent.target[1].value;
+    const extra = bootstrapEvent.target[2].value;
     const message = `<b>${name}</b>\n\n<a href="${tel}">${tel}</a>\n\n<i>${extra}</i>`;
-    const file = (event as unknown as BootstrapFormEvent).target[3].files[0];
+    const file = bootstrapEvent.target[3].files[0];
 
     if (file.type.includes('video')) {
       sendForm(
@@ -141,7 +145,12 @@ function Price() {
           </Form.Group>
           <Form.Group className="mb-4">
             <Form.Label>Дополнительно</Form.Label>
-            <Form.Control ref={refInput} placeholder="Опишите, если нужно" />
+            <Form.Control
+              as="textarea"
+              rows={2}
+              ref={refInput}
+              placeholder="Опишите, если нужно"
+            />
           </Form.Group>
           <Form.Group controlId="formFile" className="mb-4">
             <Form.Label>Выберите фото/видео (до 10mb/50mb)*</Form.Label>

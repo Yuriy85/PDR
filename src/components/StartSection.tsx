@@ -16,7 +16,7 @@ function StartSection() {
   return (
     <section className="start">
       <div className="start__wrapper">
-        <CSSTransition in={anim} mountOnEnter classNames="--left" timeout={500}>
+        <CSSTransition in={anim} mountOnEnter classNames="--left" timeout={300}>
           <div className="start__content">
             <h1>Удаление вмятин без покраски</h1>
             <p>
@@ -35,7 +35,7 @@ function StartSection() {
           in={anim}
           mountOnEnter
           classNames="--right"
-          timeout={500}
+          timeout={700}
         >
           <img className="start__img" src={startPdr} alt="pdr" />
         </CSSTransition>

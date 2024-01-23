@@ -13,7 +13,6 @@
   align-items: center;
   justify-content: space-between;
 }
-
 @mixin content {
   max-width: 30rem;
   p {
@@ -24,31 +23,15 @@
     max-width: none;
   }
 }
-
 @mixin image {
   width: 50%;
   @media screen and (max-width: 800px) {
     width: 100%;
   }
 }
-
-@mixin icon {
-  flex-direction: column;
-  justify-content: space-between;
-  width: 2rem;
-  height: 1.5rem;
-  z-index: 4;
-  box-shadow: 0 0 0.3rem 0.2rem rgb(76 76 76 / 55%);
-  position: fixed;
-  right: 2rem;
-  background: #4c4c4c85;
-  transition: 0.3s;
-  hr {
-    border: 0.1rem solid $brand-color;
-    margin: 0;
-    opacity: 1;
-  }
-  @media screen and (max-width: 535px) {
-    right: 1.2em;
+@mixin formItem {
+  &:focus {
+    border-color: $brand-color;
+    box-shadow: 0 0 0.25rem 0.25rem #f1cdb338;
   }
 }

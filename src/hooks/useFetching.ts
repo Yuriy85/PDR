@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 export const useFetching = <T>(
-  callback: <T>(...args: T[]) => Promise<unknown>
+  callback: <T>(...args: T[]) => Promise<void>
 ): [(...args: T[]) => Promise<void>, boolean, string] => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');

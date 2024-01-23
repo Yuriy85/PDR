@@ -50,11 +50,8 @@
   font-size: 1.2rem;
   letter-spacing: 0.07rem;
   color: #cdcdcd;
-  .form-control{
-    &:focus{
-      border-color: $brand-color;
-      box-shadow: 0 0 0.25rem 0.25rem #f1cdb338;
-    }
+  .form-control {
+    @include formItem;
   }
   input {
     background-color: #f2eeea;
@@ -63,6 +60,6 @@
     width: 9rem;
     height: 2.5rem;
     margin-top: 1.2rem;
-    margin-bottom: 1rem
+    margin-bottom: 1rem;
   }
 }

@@ -1,7 +1,6 @@
 .description {
   @include container;
 }
-
 .description__wrapper {
   @include wrapper;
   gap: 1rem;
@@ -9,11 +8,9 @@
     flex-direction: column;
   }
 }
-
 .description__content {
   @include content;
 }
-
 .description__img {
   @include image;
 }

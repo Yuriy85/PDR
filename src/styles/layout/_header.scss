@@ -10,14 +10,12 @@
     padding: 0 1.2em;
   }
 }
-
 .header__wrapper {
   @include wrapper;
   margin: 0 auto;
   min-width: 17rem;
   height: 7rem;
 }
-
 .header__logo {
   p {
     margin: 0;

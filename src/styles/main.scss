@@ -9,8 +9,7 @@
 // 2. Vendors
 @import
   'vendors/animations',
-  'vendors/bootstrap.min',
-  'vendors/carousel';
+  'vendors/bootstrap.min';
 // 3. Base stuff
 @import
   'base/base',
@@ -25,11 +24,13 @@
 
 // 5. Components
 @import
-  'components/about',
-  'components/description',
-  'components/start',
+  'components/aboutSection',
+  'components/descriptionSection',
+  'components/startSection',
   'components/workItem',
-  'components/works';
+  'components/workPagination',
+  'components/workFilter',
+  'components/workSection';
 
 // 6. Page-specific styles
 @import

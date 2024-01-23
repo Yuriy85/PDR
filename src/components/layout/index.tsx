@@ -6,15 +6,15 @@ import { useState } from 'react';
 
 function Layout() {
   const [error, setError] = useState('');
-  const [endVideoId, setEndVideoId] = useState('');
+  const [idInPlay, setIdInPlay] = useState('');
 
   return (
     <AppDataContext.Provider
       value={{
         error,
         setError,
-        endVideoId,
-        setEndVideoId,
+        idInPlay,
+        setIdInPlay,
       }}
     >
       <Header />
