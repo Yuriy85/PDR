@@ -1,4 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
+import Spinner from 'react-bootstrap/esm/Spinner';
 import { useNavigate } from 'react-router-dom';
 import { getVideos, VideoSnippet } from '../Api/youTube';
 import WorkItem from '../components/WorkItem';
@@ -7,12 +9,11 @@ import data from '../data';
 import ScrollToTopButton from '../components/UI/ScrollTopButton';
 import { AppDataContext } from '../context';
 import { routesPath } from '../router';
-import Spinner from 'react-bootstrap/esm/Spinner';
 import WorkFilter from '../components/WorkFilter';
 import WorkPagination from '../components/WorkPagination';
 import { empty } from '../assets/img';
-import { CSSTransition } from 'react-transition-group';
 import useObserver from '../hooks/useObserver';
+import BrandButton from '../components/UI/BrandButton';
 
 function Works() {
   const { setError } = useContext(AppDataContext);
@@ -55,53 +56,56 @@ function Works() {
   return (
     <div className="our-works">
       <div className="our-works__insert"></div>
-      <div>
-        <WorkFilter
-          setPaginateVideos={setPaginateVideos}
-          setButtonNumbers={setButtonNumbers}
-          setCountPerPage={setCountPerPage}
-          setAutoScroll={setAutoScroll}
-          setShowWheel={setShowWheel}
-          setVideos={setVideos}
+      <WorkFilter
+        setPaginateVideos={setPaginateVideos}
+        setButtonNumbers={setButtonNumbers}
+        setCountPerPage={setCountPerPage}
+        setAutoScroll={setAutoScroll}
+        setShowWheel={setShowWheel}
+        setVideos={setVideos}
+        setPage={setPage}
+        countPerPage={countPerPage}
+        autoScroll={autoScroll}
+        videos={videos}
+        page={page}
+      />
+      <div
+        className={
+          loading
+            ? 'our-works__loader our-works__loader--show'
+            : 'our-works__loader'
+        }
+      >
+        <Spinner animation="border" />
+      </div>
+      {paginateVideos.map((video, index) => (
+        <WorkItem key={video.title} video={video} isEven={!!(index % 2)} />
+      ))}
+      <CSSTransition
+        unmountOnExit
+        in={showWheel}
+        timeout={3000}
+        classNames="--wheel"
+      >
+        <img src={empty} />
+      </CSSTransition>
+      <div ref={lastElement}></div>
+      {autoScroll && videos.length !== paginateVideos.length ? (
+        <BrandButton
+          onClick={() => setCountPerPage(countPerPage + 1)}
+          disabled={showWheel}
+          className="our-works__next-button"
+        >
+          Дальше
+        </BrandButton>
+      ) : (
+        <WorkPagination
           setPage={setPage}
-          countPerPage={countPerPage}
-          autoScroll={autoScroll}
-          videos={videos}
+          buttonNumbers={buttonNumbers}
           page={page}
         />
-        <div
-          className={
-            loading
-              ? 'our-works__loader our-works__loader--show'
-              : 'our-works__loader'
-          }
-        >
-          <Spinner animation="border" />
-        </div>
-        {paginateVideos.map((video, index) => (
-          <WorkItem key={video.title} video={video} isEven={!!(index % 2)} />
-        ))}
-        <CSSTransition
-          unmountOnExit
-          in={showWheel}
-          timeout={3000}
-          classNames="--wheel"
-        >
-          <img src={empty} />
-        </CSSTransition>
-        <div ref={lastElement}></div>
-        {videos.length !== paginateVideos.length && !showWheel ? (
-          <WorkPagination
-            setCountPerPage={setCountPerPage}
-            setPage={setPage}
-            buttonNumbers={buttonNumbers}
-            countPerPage={countPerPage}
-            autoScroll={autoScroll}
-            page={page}
-          />
-        ) : null}
-        <ScrollToTopButton className="our-works__icon-to-top" />
-      </div>
+      )}
+      <ScrollToTopButton className="our-works__icon-to-top" />
     </div>
   );
 }

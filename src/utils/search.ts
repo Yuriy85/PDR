@@ -1,12 +1,10 @@
-import { VideoSnippet } from '../Api/youTube';
-
 export function search(
-  data: VideoSnippet[],
+  data: { title: string; description: string }[],
   searchWord: string
-): VideoSnippet[] {
+) {
   return data.filter(
-    (video) =>
-      video.title.toLowerCase().includes(searchWord.toLowerCase()) ||
-      video.description.toLowerCase().includes(searchWord.toLowerCase())
+    (value) =>
+      value.title.toLowerCase().includes(searchWord.toLowerCase()) ||
+      value.description.toLowerCase().includes(searchWord.toLowerCase())
   );
 }

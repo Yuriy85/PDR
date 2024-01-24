@@ -1,6 +1,7 @@
-import { VideoSnippet } from '../Api/youTube';
-
-function sortData(data: VideoSnippet[], type: 'name' | 'date' | 'relevance') {
+function sortData(
+  data: { position: number; title: string; publishedAt: string }[],
+  type: 'name' | 'date' | 'relevance'
+) {
   switch (type) {
     case 'name':
       return [...data].sort((a, b) => a.title.localeCompare(b.title));
