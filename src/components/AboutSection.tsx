@@ -7,7 +7,7 @@ function AboutSection() {
 
   useEffect(() => {
     setAnim(true)
-  }, []);
+  }, [])
 
   return (
     <section className="about">
