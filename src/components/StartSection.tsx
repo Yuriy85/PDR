@@ -20,23 +20,15 @@ function StartSection() {
           <div className="start__content">
             <h1>Удаление вмятин без покраски</h1>
             <p>
-              Ремонт вмятин без покраски (PDR) - это квалифицированный метод
-              удаления вмятин используемый в автомобильной промышленности с
-              использованием различных инструментов и методов для полного
-              восстановления повреждений до состояния, которое было до
+              Ремонт вмятин без покраски (PDR) - это квалифицированный метод удаления вмятин
+              используемый в автомобильной промышленности с использованием различных инструментов и
+              методов для полного восстановления повреждений до состояния, которое было до
               повреждения
             </p>
-            <BrandButton onClick={() => navigate(routesPath.works)}>
-              Посмотреть работы
-            </BrandButton>
+            <BrandButton onClick={() => navigate(routesPath.works)}>Посмотреть работы</BrandButton>
           </div>
         </CSSTransition>
-        <CSSTransition
-          in={anim}
-          mountOnEnter
-          classNames="--right"
-          timeout={700}
-        >
+        <CSSTransition in={anim} mountOnEnter classNames="--right" timeout={700}>
           <img className="start__img" src={startPdr} alt="pdr" />
         </CSSTransition>
       </div>

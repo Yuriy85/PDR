@@ -6,30 +6,19 @@ type NavBar = {
   link: string;
 }[];
 
-const NavMenu = function ({
-  navLinks,
-  ...props
-}: {
-  navLinks: NavBar;
-  [x: string]: unknown;
-}) {
+const NavMenu = function ({ navLinks, ...props }: { navLinks: NavBar; [x: string]: unknown }) {
   const body = document.querySelector('body');
   const [showBurger, setShowBurger] = useState(false);
-  const burgerHandler = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
+  const burgerHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
     if (setShowBurger) {
       setShowBurger(!showBurger);
     }
   };
-  const activeClass = ({ isActive }: { isActive: boolean }) =>
-    isActive ? classes.navLiShow : '';
+  const activeClass = ({ isActive }: { isActive: boolean }) => (isActive ? classes.navLiShow : '');
 
   useEffect(() => {
-    showBurger
-      ? body?.classList.add(classes.bodyBlock)
-      : body?.classList.remove(classes.bodyBlock);
+    showBurger ? body?.classList.add(classes.bodyBlock) : body?.classList.remove(classes.bodyBlock);
     body;
   }, [showBurger]);
 
@@ -37,25 +26,14 @@ const NavMenu = function ({
     <div {...props}>
       <div
         onClick={burgerHandler}
-        className={
-          showBurger
-            ? [classes.burger, classes.burgerShow].join(' ')
-            : classes.burger
-        }
+        className={showBurger ? [classes.burger, classes.burgerShow].join(' ') : classes.burger}
       >
         <hr /> <hr /> <hr />
       </div>
-      <nav
-        className={
-          showBurger ? [classes.nav, classes.navShow].join(' ') : classes.nav
-        }
-      >
+      <nav className={showBurger ? [classes.nav, classes.navShow].join(' ') : classes.nav}>
         <ul
           onClick={(event) => {
-            if (
-              setShowBurger &&
-              (event.target as HTMLElement).nodeName === 'A'
-            ) {
+            if (setShowBurger && (event.target as HTMLElement).nodeName === 'A') {
               setShowBurger(false);
             }
           }}
@@ -71,9 +49,7 @@ const NavMenu = function ({
       </nav>
       <div
         onClick={() => (showBurger ? setShowBurger(false) : null)}
-        className={
-          showBurger ? [classes.dark, classes.darkShow].join(' ') : classes.dark
-        }
+        className={showBurger ? [classes.dark, classes.darkShow].join(' ') : classes.dark}
       />
     </div>
   );

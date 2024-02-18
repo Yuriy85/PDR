@@ -13,9 +13,7 @@ export function paginate<T>(data: T[], countPerPage: number, page: number) {
 
   for (let index = 0; index < pageCount; index++) {
     buttonNumbers.push(index + 1);
-    result.push(
-      data.slice(index * countPerPage, index * countPerPage + countPerPage)
-    );
+    result.push(data.slice(index * countPerPage, index * countPerPage + countPerPage));
   }
 
   return {

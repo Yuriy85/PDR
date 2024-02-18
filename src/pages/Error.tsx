@@ -22,17 +22,10 @@ function Error() {
           <div className="start__content">
             <h1>Упс. Что-то пошло не так.</h1>
             <p>{error ? error : 'Проверьте пожалуйста адрес!'}</p>
-            <BrandButton onClick={() => navigate(routesPath.main)}>
-              На главную...
-            </BrandButton>
+            <BrandButton onClick={() => navigate(routesPath.main)}>На главную...</BrandButton>
           </div>
         </CSSTransition>
-        <CSSTransition
-          in={anim}
-          mountOnEnter
-          classNames="--right"
-          timeout={700}
-        >
+        <CSSTransition in={anim} mountOnEnter classNames="--right" timeout={700}>
           <img className="start__img" src={notFound} alt="pdr" />
         </CSSTransition>
       </div>

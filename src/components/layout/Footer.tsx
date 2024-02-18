@@ -16,11 +16,7 @@ function Footer() {
             <ReactSVG className="footer__icon" src={phoneSvg} />
             <span>+375-33-691-36-96</span>
           </a>
-          <a
-            href="https://maps.app.goo.gl/QKu5BJJGBTvsiY947"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href="https://maps.app.goo.gl/QKu5BJJGBTvsiY947" target="_blank" rel="noreferrer">
             <ReactSVG className="footer__icon" src={pointSvg} />
             <span>Гаражный массив по ул. Фатина, г. Могилев</span>
           </a>

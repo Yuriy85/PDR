@@ -23,11 +23,7 @@ function WorkItem({ video, isEven }: { video: VideoSnippet; isEven: boolean }) {
 
   return (
     <CSSTransition in={mount} timeout={300} classNames="--left">
-      <div
-        className={
-          isEven ? 'our-works__item' : 'our-works__item our-works__item--even'
-        }
-      >
+      <div className={isEven ? 'our-works__item' : 'our-works__item our-works__item--even'}>
         <div
           className={
             !isEven
@@ -38,9 +34,7 @@ function WorkItem({ video, isEven }: { video: VideoSnippet; isEven: boolean }) {
           <YouTube
             onPlay={() => {
               setIsPlay(true);
-              (setIdInPlay as React.Dispatch<React.SetStateAction<string>>)(
-                videoId
-              );
+              (setIdInPlay as React.Dispatch<React.SetStateAction<string>>)(videoId);
             }}
             onReady={(event) => {
               setVideoElement(event);

@@ -27,16 +27,10 @@ function Works() {
   const [buttonNumbers, setButtonNumbers] = useState<number[]>([]);
   const [videos, setVideos] = useState<VideoSnippet[]>([]);
   const inView = useObserver(lastElement, autoScroll);
-  const [getVideosData, loading, error] = useFetching(
-    async (listApi, key, playlistId) => {
-      const videos = await getVideos(
-        listApi as string,
-        key as string,
-        playlistId as string
-      );
-      setVideos(videos);
-    }
-  );
+  const [getVideosData, loading, error] = useFetching(async (listApi, key, playlistId) => {
+    const videos = await getVideos(listApi as string, key as string, playlistId as string);
+    setVideos(videos);
+  });
 
   useEffect(() => {
     if (error && setError) {
@@ -69,24 +63,13 @@ function Works() {
         videos={videos}
         page={page}
       />
-      <div
-        className={
-          loading
-            ? 'our-works__loader our-works__loader--show'
-            : 'our-works__loader'
-        }
-      >
+      <div className={loading ? 'our-works__loader our-works__loader--show' : 'our-works__loader'}>
         <Spinner animation="border" />
       </div>
       {paginateVideos.map((video, index) => (
         <WorkItem key={video.title} video={video} isEven={!!(index % 2)} />
       ))}
-      <CSSTransition
-        unmountOnExit
-        in={showWheel}
-        timeout={3000}
-        classNames="--wheel"
-      >
+      <CSSTransition unmountOnExit in={showWheel} timeout={3000} classNames="--wheel">
         <img src={empty} />
       </CSSTransition>
       <div ref={lastElement}></div>
@@ -99,11 +82,7 @@ function Works() {
           Дальше
         </BrandButton>
       ) : (
-        <WorkPagination
-          setPage={setPage}
-          buttonNumbers={buttonNumbers}
-          page={page}
-        />
+        <WorkPagination setPage={setPage} buttonNumbers={buttonNumbers} page={page} />
       )}
       <ScrollToTopButton className="our-works__icon-to-top" />
     </div>

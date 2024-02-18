@@ -10,11 +10,7 @@ const BrandButton = function (
   return (
     <button
       {...props}
-      className={
-        props.className
-          ? [props.className, classes.button].join(' ')
-          : classes.button
-      }
+      className={props.className ? [props.className, classes.button].join(' ') : classes.button}
     >
       {props.children}
     </button>

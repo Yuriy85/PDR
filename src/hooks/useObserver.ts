@@ -11,9 +11,7 @@ function useObserver(ref: RefObject<HTMLElement>, start: boolean): boolean {
     if (!start) {
       return;
     }
-    observer.current = new IntersectionObserver(([entries]) =>
-      setInView(entries.isIntersecting)
-    );
+    observer.current = new IntersectionObserver(([entries]) => setInView(entries.isIntersecting));
     observer.current.observe(ref.current as HTMLElement);
   }, [start]);
 

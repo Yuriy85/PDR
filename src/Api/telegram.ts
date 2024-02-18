@@ -1,11 +1,6 @@
 import axios from 'axios';
 
-export const sendMessage = async (
-  token: string,
-  tgApi: string,
-  chat_id: string,
-  text: string
-) => {
+export const sendMessage = async (token: string, tgApi: string, chat_id: string, text: string) => {
   await axios.post(tgApi.replace('<token>', token), {
     chat_id,
     parse_mode: 'HTML',
@@ -29,13 +24,9 @@ export const sendFile = async (
     video: file,
   };
 
-  await axios.post(
-    tgApi.replace('<token>', token),
-    fileType ? videoParameter : photoParameter,
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    }
-  );
+  await axios.post(tgApi.replace('<token>', token), fileType ? videoParameter : photoParameter, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 };

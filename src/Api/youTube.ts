@@ -23,7 +23,5 @@ export const getVideos = async (
       },
     })
   ).data;
-  return result.items.map(
-    (result: { snippet: VideoSnippet }) => result.snippet
-  );
+  return result.items.map((result: { snippet: VideoSnippet }) => result.snippet);
 };

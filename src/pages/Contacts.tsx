@@ -14,9 +14,7 @@ function Contacts() {
       )}
       <iframe
         onLoad={() => setIsLoading(false)}
-        className={
-          isLoading ? 'contacts__map' : 'contacts__map contacts__map--active'
-        }
+        className={isLoading ? 'contacts__map' : 'contacts__map contacts__map--active'}
         src={data.googleMapApi}
         loading="lazy"
         referrerPolicy={'no-referrer-when-downgrade'}

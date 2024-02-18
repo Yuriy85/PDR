@@ -33,12 +33,7 @@ function Price() {
         photo as File,
         fileType as string
       );
-      await sendMessage(
-        token as string,
-        tgMessageApi as string,
-        chatId as string,
-        text as string
-      );
+      await sendMessage(token as string, tgMessageApi as string, chatId as string, text as string);
       setSuccessAlert(true);
       setValidated(false);
       if (refInput.current && refFileInput.current) {
@@ -63,9 +58,7 @@ function Price() {
     }
   }, [error]);
 
-  function handleSubmit(
-    event: FormEvent<HTMLFormElement> | BootstrapFormEvent
-  ) {
+  function handleSubmit(event: FormEvent<HTMLFormElement> | BootstrapFormEvent) {
     (event as FormEvent<HTMLFormElement>).preventDefault();
     const bootstrapEvent: BootstrapFormEvent = event as BootstrapFormEvent;
     const name = bootstrapEvent.target[0].value;
@@ -85,14 +78,7 @@ function Price() {
         'video'
       );
     } else if (file.type.includes('image')) {
-      sendForm(
-        data.tgToken,
-        data.tgMessageApi,
-        data.tgPhotoApi,
-        data.chatId,
-        message,
-        file
-      );
+      sendForm(data.tgToken, data.tgMessageApi, data.tgPhotoApi, data.chatId, message, file);
     } else {
       setIsWrongFile(true);
     }
@@ -115,12 +101,11 @@ function Price() {
           <div className="price__content">
             <h1>Как узнать стоимость?</h1>
             <p>
-              Заполните форму, отправьте нам и мы с вами свяжемся в ближайшее
-              время и сориентируем по стоимости. К сожалению, по фотографии
-              можно понять только примерную стоимость ремонта, так как зачастую
-              присланные фотографии плохого качества, либо сделаны под
-              неправильным ракурсом. Для точной оценки мастер должен увидеть
-              повреждение &quot;вживую&quot;.
+              Заполните форму, отправьте нам и мы с вами свяжемся в ближайшее время и сориентируем
+              по стоимости. К сожалению, по фотографии можно понять только примерную стоимость
+              ремонта, так как зачастую присланные фотографии плохого качества, либо сделаны под
+              неправильным ракурсом. Для точной оценки мастер должен увидеть повреждение
+              &quot;вживую&quot;.
             </p>
           </div>
 
@@ -159,12 +144,7 @@ function Price() {
             </Form.Group>
             <Form.Group controlId="formFile" className="mb-4">
               <Form.Label>Выберите фото/видео (до 10mb/50mb)*</Form.Label>
-              <Form.Control
-                ref={refFileInput}
-                isInvalid={isWrongFile}
-                required
-                type="file"
-              />
+              <Form.Control ref={refFileInput} isInvalid={isWrongFile} required type="file" />
             </Form.Group>
             <BrandButton disabled={isLoading} type="submit">
               {isLoading ? 'Отправляю...' : 'Отправить'}
@@ -176,9 +156,7 @@ function Price() {
             >
               {successAlert
                 ? 'Сообщение отправлено, скоро мы вам перезвоним'
-                : `Сообщение не отправлено! ${
-                    isWrongFile ? 'Проверьте формат файла' : error
-                  }`}
+                : `Сообщение не отправлено! ${isWrongFile ? 'Проверьте формат файла' : error}`}
             </Alert>
           </Form>
         </div>
